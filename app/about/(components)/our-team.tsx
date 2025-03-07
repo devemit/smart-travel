@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { TwitterIcon, LinkedinIcon, GithubIcon } from 'lucide-react';
+import { Twitter, Linkedin, Github } from 'lucide-react';
 
 const team = [
    {
@@ -51,7 +51,7 @@ export default function OurTeam() {
          <div className='text-center mb-12'>
             <h2 className='text-3xl md:text-4xl font-bold mb-4 text-gray-900'>Meet Our Team</h2>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-               The passionate individuals behind Smart Travel's success
+               The passionate individuals behind Smart Travel&apos;s success
             </p>
          </div>
 
@@ -80,7 +80,7 @@ export default function OurTeam() {
                               href={member.social.twitter}
                               className='text-gray-500 hover:text-primary'
                            >
-                              <TwitterIcon size={18} />
+                              <Twitter size={18} />
                            </a>
                         )}
                         {member.social.linkedin && (
@@ -88,7 +88,7 @@ export default function OurTeam() {
                               href={member.social.linkedin}
                               className='text-gray-500 hover:text-primary'
                            >
-                              <LinkedinIcon size={18} />
+                              <Linkedin size={18} />
                            </a>
                         )}
                         {member.social.github && (
@@ -96,7 +96,7 @@ export default function OurTeam() {
                               href={member.social.github}
                               className='text-gray-500 hover:text-primary'
                            >
-                              <GithubIcon size={18} />
+                              <Github size={18} />
                            </a>
                         )}
                      </div>

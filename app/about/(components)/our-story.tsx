@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-
 import Image from 'next/image';
 
 export default function OurStory() {
@@ -20,13 +19,13 @@ export default function OurStory() {
                      that despite the abundance of travel resources available online, planning trips
                      remained a fragmented and often overwhelming experience. They envisioned a
                      platform that would leverage technology to provide truly personalized travel
-                     recommendations tailored to each traveler's preferences.
+                     recommendations tailored to each traveler&apos;s preferences.
                   </p>
                   <p>
                      Today, Smart Travel combines artificial intelligence, real-time data, and human
-                     expertise to create seamless travel experiences. We're proud to help millions
-                     of users discover new destinations, create unforgettable memories, and travel
-                     with confidence.
+                     expertise to create seamless travel experiences. We&apos;re proud to help
+                     millions of users discover new destinations, create unforgettable memories, and
+                     travel with confidence.
                   </p>
                </div>
                <Button className='mt-6'>Learn More About Our Vision</Button>
