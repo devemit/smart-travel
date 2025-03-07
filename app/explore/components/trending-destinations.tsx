@@ -1,6 +1,8 @@
 import Image from 'next/image';
+
 import Link from 'next/link';
-import { MapPin, TrendingUp } from 'lucide-react';
+
+import { TrendingUp } from 'lucide-react';
 
 const trendingDestinations = [
    {
