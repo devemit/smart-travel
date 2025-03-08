@@ -23,14 +23,14 @@ const testimonials = [
 
 export default function Testimonials() {
    return (
-      <section className='container mx-auto px-6 py-16'>
-         <h2 className='text-3xl font-bold text-center mb-4'>What Our Travelers Say</h2>
-         <p className='text-gray-600 text-center mb-12 max-w-2xl mx-auto'>
+      <section className='container mx-auto px-4 sm:px-6 py-12 sm:py-16 overflow-hidden'>
+         <h2 className='text-2xl sm:text-3xl font-bold text-center mb-4'>What Our Travelers Say</h2>
+         <p className='text-gray-600 text-center mb-8 sm:mb-12 max-w-2xl mx-auto'>
             Join thousands of satisfied travelers who have discovered new destinations and
             experiences with Smart Travel.
          </p>
 
-         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8'>
             {testimonials.map((item, index) => (
                <div key={index} className='bg-white p-6 rounded-xl shadow-md'>
                   <div className='flex items-center mb-4'>

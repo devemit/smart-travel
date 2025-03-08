@@ -25,10 +25,12 @@ const features = [
 
 export default function AppFeatures() {
    return (
-      <section className='container mx-auto px-6 py-12'>
-         <h2 className='text-3xl font-bold text-center mb-12'>Travel Smarter with Our Features</h2>
+      <section className='container mx-auto px-4 sm:px-6 py-12 overflow-hidden'>
+         <h2 className='text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12'>
+            Travel Smarter with Our Features
+         </h2>
 
-         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8'>
             {features.map((feature, index) => (
                <div
                   key={index}

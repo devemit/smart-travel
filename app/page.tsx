@@ -10,7 +10,7 @@ import TravelTips from '@/components/travel-tips';
 
 export default function Home() {
    return (
-      <main className='flex flex-col min-h-screen'>
+      <main className='flex flex-col min-h-screen overflow-x-hidden'>
          <HeroSection />
          <TravelSearch />
          <AppFeatures />

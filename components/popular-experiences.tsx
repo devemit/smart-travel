@@ -35,16 +35,16 @@ const experiences = [
 
 export default function PopularExperiences() {
    return (
-      <section className='bg-gray-50 py-12'>
-         <div className='container mx-auto px-6'>
-            <div className='flex justify-between items-center mb-8'>
-               <h2 className='text-3xl font-bold'>Popular Experiences</h2>
+      <section className='bg-gray-50 py-12 w-full overflow-x-hidden'>
+         <div className='container mx-auto px-4 sm:px-6'>
+            <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8'>
+               <h2 className='text-2xl sm:text-3xl font-bold'>Popular Experiences</h2>
                <Link href='/explore' className='text-primary hover:underline font-medium'>
                   View all experiences →
                </Link>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                {experiences.map((exp) => (
                   <div
                      key={exp.id}

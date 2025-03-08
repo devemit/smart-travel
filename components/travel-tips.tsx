@@ -30,9 +30,9 @@ const tips = [
 
 export default function TravelTips() {
    return (
-      <section className='container mx-auto px-6 py-12'>
-         <div className='flex justify-between items-center mb-8'>
-            <h2 className='text-3xl font-bold'>Travel Tips & Guides</h2>
+      <section className='container mx-auto px-4 sm:px-6 py-8 sm:py-12 overflow-hidden'>
+         <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6 sm:mb-8'>
+            <h2 className='text-2xl sm:text-3xl font-bold'>Travel Tips & Guides</h2>
             <Link
                href='/blog'
                className='text-primary hover:underline font-medium flex items-center'
@@ -41,7 +41,7 @@ export default function TravelTips() {
             </Link>
          </div>
 
-         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6'>
             {tips.map((tip) => (
                <Link
                   href={`/blog/${tip.id}`}

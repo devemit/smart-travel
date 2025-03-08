@@ -27,15 +27,15 @@ const collections = [
 
 export default function FeaturedCollections() {
    return (
-      <section>
-         <div className='flex justify-between items-center mb-6'>
+      <section className='max-w-full overflow-hidden'>
+         <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6'>
             <h2 className='text-2xl font-bold'>Featured Collections</h2>
             <Link href='/explore' className='text-primary hover:underline text-sm font-medium'>
                View All Collections
             </Link>
          </div>
 
-         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6'>
             {collections.map((collection) => (
                <Link
                   key={collection.id}

@@ -41,7 +41,7 @@ export default function FeaturedDestination() {
             </div>
          </div>
 
-         <div className='p-6'>
+         <div className='p-4 sm:p-6'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-6'>
                <div className='flex items-start'>
                   <MapPin className='h-5 w-5 text-primary mr-2 mt-0.5' />
@@ -68,18 +68,16 @@ export default function FeaturedDestination() {
                </div>
             </div>
 
-            <p className='text-gray-700 mb-6'>{featuredDestination.description}</p>
+            <p className='text-gray-700 mb-6 break-words'>{featuredDestination.description}</p>
 
             <div className='flex flex-col sm:flex-row gap-3'>
-               <Button asChild>
-                  <Link href={`/destinations/${featuredDestination.id}`}>
-                     Plan a Trip to {featuredDestination.name}
-                  </Link>
+               <Button className='w-full sm:w-auto' asChild>
+                  <Link href={`/destinations/${featuredDestination.id}`}>Plan a Trip</Link>
                </Button>
-               <Button variant='outline' asChild>
+               <Button variant='outline' className='w-full sm:w-auto' asChild>
                   <Link
                      href={`/destinations/${featuredDestination.id}`}
-                     className='flex items-center'
+                     className='flex items-center justify-center'
                   >
                      <Info className='mr-1 h-4 w-4' />
                      More Information

@@ -1,10 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { authRoutes, navConfig } from '@/utils/navigation-config';
-import { Home } from 'lucide-react';
+import Image from 'next/image';
+import logo from '@/public/logo.png';
+
 import MobileNav from './mobile-nav';
+
 import { Button } from './ui/button';
+
+import { authRoutes, navConfig } from '@/utils/navigation-config';
 import { useAuthState } from '@/hooks/useAuthState';
 
 export default function Navbar() {
@@ -13,10 +17,16 @@ export default function Navbar() {
    return (
       <>
          <nav className='bg-white border-b shadow-sm py-4 px-6'>
-            <div className='container mx-auto flex justify-between items-center'>
-               <Link href='/' className='font-bold text-xl text-primary flex items-center gap-2'>
-                  <Home size={24} />
-                  <span>Smart Travel</span>
+            <div className='container mx-auto flex justify-between items-center h-10'>
+               <Link href='/' className='flex items-center'>
+                  <Image
+                     src={logo}
+                     alt='Smart Travel Logo'
+                     className='w-auto object-contain'
+                     width={120}
+                     height={16}
+                     priority
+                  />
                </Link>
 
                {/* Desktop nav items */}
