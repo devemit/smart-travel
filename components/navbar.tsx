@@ -2,17 +2,21 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+
+import { cn } from '@/lib/utils';
+import { authRoutes, navConfig } from '@/utils/navigation-config';
+
 import logo from '@/public/logo.png';
 
 import MobileNav from './mobile-nav';
 
 import { Button } from './ui/button';
-
-import { authRoutes, navConfig } from '@/utils/navigation-config';
 import { useAuthState } from '@/hooks/useAuthState';
 
 export default function Navbar() {
    const { isAuthenticated, user, logout } = useAuthState();
+   const pathname = usePathname();
 
    return (
       <>
@@ -30,16 +34,28 @@ export default function Navbar() {
                </Link>
 
                {/* Desktop nav items */}
-               <div className='space-x-6 hidden md:flex items-center'>
-                  {navConfig.map((item) => (
-                     <Link
-                        key={item.path}
-                        href={item.path}
-                        className='hover:text-primary transition'
-                     >
-                        {item.title}
-                     </Link>
-                  ))}
+               <div className='space-x-8 hidden md:flex items-center'>
+                  {navConfig.map((item) => {
+                     const isActive =
+                        pathname === item.path ||
+                        (item.path !== '/' && pathname.startsWith(item.path));
+
+                     return (
+                        <Link
+                           key={item.path}
+                           href={item.path}
+                           className={cn(
+                              'relative font-medium text-sm lowercase tracking-wide transition-colors duration-200',
+                              isActive ? 'text-primary' : 'text-gray-700 hover:text-primary'
+                           )}
+                        >
+                           {item.title.toLowerCase()}
+                           {isActive && (
+                              <span className='absolute -bottom-1.5 left-0 w-full h-0.5 bg-primary rounded-full' />
+                           )}
+                        </Link>
+                     );
+                  })}
                </div>
 
                {/* Desktop auth UI */}
