@@ -8,7 +8,7 @@ const testimonials = [
       avatar: '/images/avatar-1.jpg',
    },
    {
-      quote: "I love how the app shows me weather forecasts for my destinations. It's helped me pack perfectly every time.",
+      quote: 'I love how the app shows me weather forecasts for my destinations. It&apos;s helped me pack perfectly every time.',
       name: 'Michael Chen',
       title: 'Business Traveler',
       avatar: '/images/avatar-2.jpg',
@@ -42,7 +42,7 @@ export default function Testimonials() {
                         <p className='text-sm text-gray-500'>{item.title}</p>
                      </div>
                   </div>
-                  <p className='text-gray-700 italic'>"{item.quote}"</p>
+                  <p className='text-gray-700 italic'>&quot;{item.quote}&quot;</p>
                </div>
             ))}
          </div>
