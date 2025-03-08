@@ -42,9 +42,8 @@ export default function AppCTA() {
                         <Link href='/auth/signup'>Sign Up Free</Link>
                      </Button>
                      <Button
-                        variant='outline'
                         size='lg'
-                        className='border-white hover:bg-white/10 w-full sm:w-auto'
+                        className='border-white bg-blue-600  hover:bg-white/10 w-full sm:w-auto'
                         asChild
                      >
                         <Link href='/destinations'>Explore Destinations</Link>
