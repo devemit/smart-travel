@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Star } from 'lucide-react';
-import { Button } from './ui/button';
 
 const experiences = [
    {
