@@ -8,7 +8,7 @@ const experiences = [
       id: 1,
       title: 'Hiking Trail Adventure',
       location: 'Swiss Alps, Switzerland',
-      image: '/images/hiking-trail.jpg',
+      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rating: 4.9,
       reviews: 128,
       price: 89,
@@ -17,7 +17,7 @@ const experiences = [
       id: 2,
       title: 'Food Tour Experience',
       location: 'Barcelona, Spain',
-      image: '/images/food-tour.jpg',
+      image: 'https://plus.unsplash.com/premium_photo-1679591002405-13fec066bd53?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rating: 4.8,
       reviews: 97,
       price: 65,
@@ -26,7 +26,7 @@ const experiences = [
       id: 3,
       title: 'Historical City Tour',
       location: 'Rome, Italy',
-      image: '/images/city-tour.jpg',
+      image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1996&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       rating: 4.7,
       reviews: 156,
       price: 55,
@@ -65,10 +65,6 @@ export default function PopularExperiences() {
                            </div>
                            <span className='font-bold'>${exp.price}</span>
                         </div>
-
-                        <Button asChild className='w-full'>
-                           <Link href={`/experiences/${exp.id}`}>Book Now</Link>
-                        </Button>
                      </div>
                   </div>
                ))}

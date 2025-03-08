@@ -1,18 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { authRoutes, navConfig } from '@/utils/navigation-config';
 
-import logo from '@/public/logo.png';
-
 import MobileNav from './mobile-nav';
 
 import { Button } from './ui/button';
 import { useAuthState } from '@/hooks/useAuthState';
+import { MapPin } from 'lucide-react';
 
 export default function Navbar() {
    const { isAuthenticated, user, logout } = useAuthState();
@@ -20,20 +18,18 @@ export default function Navbar() {
 
    return (
       <>
-         <nav className='bg-white border-b shadow-sm py-4 px-6'>
+         <nav className='bg-white shadow-sm border-b-2 py-4 px-6'>
             <div className='container mx-auto flex justify-between items-center h-10'>
                <Link href='/' className='flex items-center'>
-                  <Image
-                     src={logo}
-                     alt='Smart Travel Logo'
-                     className='w-auto object-contain'
-                     width={120}
-                     height={16}
-                     priority
-                  />
+                  <div className='flex items-center gap-1.5'>
+                     <MapPin className='h-5 w-5 text-blue-600' />
+                     <span className='font-bold text-xl tracking-tight'>
+                        <span className='text-blue-600'>Easy</span>
+                        <span className='text-gray-800'>Travel</span>
+                     </span>
+                  </div>
                </Link>
 
-               {/* Desktop nav items */}
                <div className='space-x-8 hidden md:flex items-center'>
                   {navConfig.map((item) => {
                      const isActive =

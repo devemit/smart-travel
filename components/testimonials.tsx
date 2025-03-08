@@ -5,19 +5,22 @@ const testimonials = [
       quote: 'Smart Travel made planning my European vacation so easy. The recommendations were spot on!',
       name: 'Sarah Johnson',
       title: 'Adventure Traveler',
-      avatar: '/images/avatar-1.jpg',
+      avatar:
+         'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
    },
    {
       quote: 'I love how the app shows me weather forecasts for my destinations. It&apos;s helped me pack perfectly every time.',
       name: 'Michael Chen',
       title: 'Business Traveler',
-      avatar: '/images/avatar-2.jpg',
+      avatar:
+         'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
    },
    {
       quote: 'The personalized recommendations have introduced me to hidden gems I would have never found otherwise.',
       name: 'Priya Sharma',
       title: 'Culture Explorer',
-      avatar: '/images/avatar-3.jpg',
+      avatar:
+         'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
    },
 ];
 

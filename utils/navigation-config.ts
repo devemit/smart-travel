@@ -30,17 +30,12 @@ export const navConfig: NavRoute[] = [
 
 export const protectedRoutes: NavRoute[] = [
    {
-      title: 'Dashboard',
-      path: '/dashboard',
-      isProtected: true,
-   },
-   {
-      title: 'Trips',
+      title: 'My Trips',
       path: '/trips',
       isProtected: true,
       children: [
          {
-            title: 'My Trips',
+            title: 'All Trips',
             path: '/trips',
          },
          {
@@ -48,16 +43,6 @@ export const protectedRoutes: NavRoute[] = [
             path: '/trips/create',
          },
       ],
-   },
-   {
-      title: 'Profile',
-      path: '/profile',
-      isProtected: true,
-   },
-   {
-      title: 'Bookings',
-      path: '/bookings',
-      isProtected: true,
    },
 ];
 

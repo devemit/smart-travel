@@ -33,10 +33,7 @@ export default function TravelTips() {
       <section className='container mx-auto px-4 sm:px-6 py-8 sm:py-12 overflow-hidden'>
          <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6 sm:mb-8'>
             <h2 className='text-2xl sm:text-3xl font-bold'>Travel Tips & Guides</h2>
-            <Link
-               href='/blog'
-               className='text-primary hover:underline font-medium flex items-center'
-            >
+            <Link href='/' className='text-primary hover:underline font-medium flex items-center'>
                All articles <ArrowRight size={16} className='ml-1' />
             </Link>
          </div>
@@ -44,7 +41,7 @@ export default function TravelTips() {
          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6'>
             {tips.map((tip) => (
                <Link
-                  href={`/blog/${tip.id}`}
+                  href='/'
                   key={tip.id}
                   className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'
                >
