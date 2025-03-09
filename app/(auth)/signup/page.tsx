@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import { z } from 'zod';
@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/form';
 
 const SignUp = () => {
-   let error = '';
+   const error = '';
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
