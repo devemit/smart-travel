@@ -29,8 +29,7 @@ import {
 } from '@/components/ui/form';
 
 const SignUp = () => {
-   const [error, setError] = useState('');
-
+   let error = '';
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
