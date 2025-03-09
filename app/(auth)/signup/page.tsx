@@ -107,7 +107,9 @@ const SignUp = () => {
                            </FormItem>
                         )}
                      />
-                     <Button type='submit'>Sign up</Button>
+                     <Button className='w-full' type='submit'>
+                        Sign up
+                     </Button>
                   </form>
                </Form>
             </CardContent>

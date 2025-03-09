@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { formSchema } from '@/lib/zod';
+import { formSchema, signInFormSchema } from '@/lib/zod';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,15 +30,15 @@ import {
 
 const SignIn = () => {
    let error = '';
-   const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
+   const form = useForm<z.infer<typeof signInFormSchema>>({
+      resolver: zodResolver(signInFormSchema),
       defaultValues: {
          email: '',
          password: '',
       },
    });
 
-   function onSubmit(values: z.infer<typeof formSchema>) {
+   function onSubmit(values: z.infer<typeof signInFormSchema>) {
       console.log(values, 'values');
    }
 
@@ -83,7 +83,7 @@ const SignIn = () => {
                         name='password'
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Passoword</FormLabel>
+                              <FormLabel>Password</FormLabel>
                               <FormControl>
                                  <Input
                                     type='password'
@@ -95,7 +95,9 @@ const SignIn = () => {
                            </FormItem>
                         )}
                      />
-                     <Button type='submit'>Submit</Button>
+                     <Button className='w-full' type='submit'>
+                        Submit
+                     </Button>
                   </form>
                </Form>
             </CardContent>
