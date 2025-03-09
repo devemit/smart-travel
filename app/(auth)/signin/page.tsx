@@ -27,6 +27,8 @@ import {
    FormLabel,
    FormMessage,
 } from '@/components/ui/form';
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
 
 const SignIn = () => {
    const error = '';
@@ -38,8 +40,26 @@ const SignIn = () => {
       },
    });
 
-   function onSubmit(values: z.infer<typeof signInFormSchema>) {
-      console.log(values, 'values');
+   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
+      const { email, password } = values;
+      const { data, error } = await authClient.signIn.email(
+         {
+            email,
+            password,
+            callbackURL: '/',
+         },
+         {
+            onRequest: (ctx) => {
+               toast('Logging in...');
+            },
+            onSuccess: (ctx) => {
+               form.reset();
+            },
+            onError: (ctx) => {
+               toast(ctx.error.message);
+            },
+         }
+      );
    }
 
    return (
