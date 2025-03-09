@@ -58,10 +58,6 @@ const SignUp = () => {
             onError: (ctx) => {
                toast(ctx.error.message);
             },
-            fetchOptions: {
-               mode: 'no-cors',
-               credentials: 'include',
-            },
          }
       );
    }
