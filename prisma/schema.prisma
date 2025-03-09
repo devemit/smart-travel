@@ -11,13 +11,15 @@ model User {
    id            String    @id @default(cuid())
    name          String?
    email         String    @unique
-   emailVerified DateTime?
+   emailVerified Boolean?
    image         String?
    accounts      Account[]
    sessions      Session[]
 
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt
+
+   @@map("user")
 }
 
 model Account {
@@ -38,7 +40,17 @@ model Account {
 
    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+   accountId             String
+   providerId            String
+   accessToken           String?
+   refreshToken          String?
+   idToken               String?
+   accessTokenExpiresAt  DateTime?
+   refreshTokenExpiresAt DateTime?
+   password              String?
+
    @@id([provider, providerAccountId])
+   @@map("account")
 }
 
 model Session {
@@ -49,6 +61,13 @@ model Session {
 
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
+   expiresAt DateTime
+   token     String
+   ipAddress String?
+   userAgent String?
+
+   @@unique([token])
+   @@map("session")
 }
 
 model VerificationToken {
@@ -57,4 +76,15 @@ model VerificationToken {
    expires    DateTime
 
    @@id([identifier, token])
+}
+
+model Verification {
+   id         String    @id
+   identifier String
+   value      String
+   expiresAt  DateTime
+   createdAt  DateTime?
+   updatedAt  DateTime?
+
+   @@map("verification")
 }

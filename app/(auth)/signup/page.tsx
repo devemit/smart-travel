@@ -27,9 +27,11 @@ import {
    FormLabel,
    FormMessage,
 } from '@/components/ui/form';
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
 
 const SignUp = () => {
-   const error = '';
+   const errorr = '';
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -39,8 +41,27 @@ const SignUp = () => {
       },
    });
 
-   function onSubmit(values: z.infer<typeof formSchema>) {
-      console.log(values, 'sign up vals');
+   async function onSubmit(values: z.infer<typeof formSchema>) {
+      const { name, email, password } = values;
+      const { data, error } = await authClient.signUp.email(
+         {
+            email,
+            password,
+            name,
+            callbackURL: '/signin',
+         },
+         {
+            onRequest: (ctx) => {
+               toast('Creating your account...');
+            },
+            onSuccess: (ctx) => {
+               form.reset();
+            },
+            onError: (ctx) => {
+               toast(ctx.error.message);
+            },
+         }
+      );
    }
 
    return (
@@ -53,10 +74,10 @@ const SignUp = () => {
                </CardDescription>
             </CardHeader>
 
-            {error && (
+            {errorr && (
                <CardContent>
                   <Alert variant='destructive'>
-                     <AlertDescription>{error}</AlertDescription>
+                     <AlertDescription>{errorr}</AlertDescription>
                   </Alert>
                </CardContent>
             )}
