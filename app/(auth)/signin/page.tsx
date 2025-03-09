@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { signInFormSchema } from '@/lib/zod';
+import { authClient } from '@/lib/auth-client';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,7 +19,6 @@ import {
    CardHeader,
    CardTitle,
 } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
    Form,
    FormControl,
@@ -27,11 +27,9 @@ import {
    FormLabel,
    FormMessage,
 } from '@/components/ui/form';
-import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
 
 const SignIn = () => {
-   const error = '';
    const form = useForm<z.infer<typeof signInFormSchema>>({
       resolver: zodResolver(signInFormSchema),
       defaultValues: {
@@ -42,17 +40,17 @@ const SignIn = () => {
 
    async function onSubmit(values: z.infer<typeof signInFormSchema>) {
       const { email, password } = values;
-      const { data, error } = await authClient.signIn.email(
+      const {} = await authClient.signIn.email(
          {
             email,
             password,
             callbackURL: '/',
          },
          {
-            onRequest: (ctx) => {
+            onRequest: () => {
                toast('Logging in...');
             },
-            onSuccess: (ctx) => {
+            onSuccess: () => {
                form.reset();
             },
             onError: (ctx) => {
@@ -73,14 +71,6 @@ const SignIn = () => {
                   Enter your email and password to sign in
                </CardDescription>
             </CardHeader>
-
-            {error && (
-               <CardContent>
-                  <Alert variant='destructive'>
-                     <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-               </CardContent>
-            )}
 
             <CardContent>
                <Form {...form}>

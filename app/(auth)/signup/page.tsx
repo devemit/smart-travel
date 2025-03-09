@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { formSchema } from '@/lib/zod';
+import { authClient } from '@/lib/auth-client';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,11 +28,9 @@ import {
    FormLabel,
    FormMessage,
 } from '@/components/ui/form';
-import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
 
 const SignUp = () => {
-   const errorr = '';
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -43,7 +42,7 @@ const SignUp = () => {
 
    async function onSubmit(values: z.infer<typeof formSchema>) {
       const { name, email, password } = values;
-      const { data, error } = await authClient.signUp.email(
+      const {} = await authClient.signUp.email(
          {
             email,
             password,
@@ -51,10 +50,10 @@ const SignUp = () => {
             callbackURL: '/signin',
          },
          {
-            onRequest: (ctx) => {
+            onRequest: () => {
                toast('Creating your account...');
             },
-            onSuccess: (ctx) => {
+            onSuccess: () => {
                form.reset();
             },
             onError: (ctx) => {
@@ -73,14 +72,6 @@ const SignUp = () => {
                   Enter your details to create your account
                </CardDescription>
             </CardHeader>
-
-            {errorr && (
-               <CardContent>
-                  <Alert variant='destructive'>
-                     <AlertDescription>{errorr}</AlertDescription>
-                  </Alert>
-               </CardContent>
-            )}
 
             <CardContent>
                <Form {...form}>
