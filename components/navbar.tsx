@@ -68,11 +68,7 @@ export default function Navbar() {
                   ) : (
                      <div className='space-x-2'>
                         {authRoutes.map((item) => (
-                           <Button
-                              key={item.path}
-                              variant={item.title === 'Sign In' ? 'outline' : 'default'}
-                              asChild
-                           >
+                           <Button key={item.path} asChild>
                               <Link href={item.path}>{item.title}</Link>
                            </Button>
                         ))}
@@ -88,12 +84,7 @@ export default function Navbar() {
                   ) : (
                      <div className='flex space-x-2'>
                         {authRoutes.map((item) => (
-                           <Button
-                              key={item.path}
-                              variant={item.title === 'Sign In' ? 'outline' : 'default'}
-                              size='sm'
-                              asChild
-                           >
+                           <Button key={item.path} size='sm' className='bg-blue-600' asChild>
                               <Link href={item.path}>
                                  {item.title === 'Sign In' ? 'Sign In' : 'Sign Up'}
                               </Link>

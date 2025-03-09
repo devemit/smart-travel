@@ -2,9 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { formSchema } from '@/lib/zod';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
    Card,
    CardContent,
@@ -14,47 +19,30 @@ import {
    CardTitle,
 } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+   Form,
+   FormControl,
+   FormField,
+   FormItem,
+   FormLabel,
+   FormMessage,
+} from '@/components/ui/form';
 
 const SignUp = () => {
-   const [formData, setFormData] = useState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-   });
-   const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState('');
 
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-         ...formData,
-         [e.target.name]: e.target.value,
-      });
-   };
+   const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+         name: '',
+         email: '',
+         password: '',
+      },
+   });
 
-   const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsLoading(true);
-      setError('');
-
-      if (formData.password !== formData.confirmPassword) {
-         setError('Passwords do not match');
-         setIsLoading(false);
-         return;
-      }
-
-      try {
-         // Implement your sign up logic here
-         console.log('Sign up with:', formData);
-         // Redirect after successful sign up
-      } catch (err) {
-         setError('Failed to create account. Please try again.');
-         console.error(err);
-      } finally {
-         setIsLoading(false);
-      }
-   };
+   function onSubmit(values: z.infer<typeof formSchema>) {
+      console.log(values, 'sign up vals');
+   }
 
    return (
       <div className='flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -62,7 +50,7 @@ const SignUp = () => {
             <CardHeader className='space-y-1'>
                <CardTitle className='text-2xl font-bold text-center'>Create an account</CardTitle>
                <CardDescription className='text-center'>
-                  Enter your information to create an account
+                  Enter your details to create your account
                </CardDescription>
             </CardHeader>
 
@@ -75,71 +63,54 @@ const SignUp = () => {
             )}
 
             <CardContent>
-               <form onSubmit={handleSubmit} className='space-y-4'>
-                  <div className='grid grid-cols-2 gap-4'>
-                     <div className='space-y-2'>
-                        <Label htmlFor='firstName'>First name</Label>
-                        <Input
-                           id='firstName'
-                           name='firstName'
-                           value={formData.firstName}
-                           onChange={handleChange}
-                           required
-                        />
-                     </div>
-                     <div className='space-y-2'>
-                        <Label htmlFor='lastName'>Last name</Label>
-                        <Input
-                           id='lastName'
-                           name='lastName'
-                           value={formData.lastName}
-                           onChange={handleChange}
-                           required
-                        />
-                     </div>
-                  </div>
-
-                  <div className='space-y-2'>
-                     <Label htmlFor='email'>Email</Label>
-                     <Input
-                        id='email'
+               <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+                     <FormField
+                        control={form.control}
+                        name='name'
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Name</FormLabel>
+                              <FormControl>
+                                 <Input placeholder='John Doe' {...field} />
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
+                     />
+                     <FormField
+                        control={form.control}
                         name='email'
-                        type='email'
-                        placeholder='name@example.com'
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Email</FormLabel>
+                              <FormControl>
+                                 <Input type='email' placeholder='johndoe@smart.com' {...field} />
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
                      />
-                  </div>
-
-                  <div className='space-y-2'>
-                     <Label htmlFor='password'>Password</Label>
-                     <Input
-                        id='password'
+                     <FormField
+                        control={form.control}
                         name='password'
-                        type='password'
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Password</FormLabel>
+                              <FormControl>
+                                 <Input
+                                    type='password'
+                                    placeholder='Create a strong password'
+                                    {...field}
+                                 />
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
                      />
-                  </div>
-
-                  <div className='space-y-2'>
-                     <Label htmlFor='confirmPassword'>Confirm Password</Label>
-                     <Input
-                        id='confirmPassword'
-                        name='confirmPassword'
-                        type='password'
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                     />
-                  </div>
-
-                  <Button type='submit' className='w-full' disabled={isLoading}>
-                     {isLoading ? 'Creating account...' : 'Sign up'}
-                  </Button>
-               </form>
+                     <Button type='submit'>Sign up</Button>
+                  </form>
+               </Form>
             </CardContent>
 
             <CardFooter className='flex flex-col'>

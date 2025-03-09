@@ -49,10 +49,10 @@ export const protectedRoutes: NavRoute[] = [
 export const authRoutes: NavRoute[] = [
    {
       title: 'Sign In',
-      path: '/auth/signin',
+      path: '/signin',
    },
    {
       title: 'Sign Up',
-      path: '/auth/signup',
+      path: '/signup',
    },
 ];
