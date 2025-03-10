@@ -44,7 +44,7 @@ const SignIn = () => {
          {
             email,
             password,
-            callbackURL: '/',
+            callbackURL: '/dashboard',
          },
          {
             onRequest: () => {
