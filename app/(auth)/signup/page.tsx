@@ -67,7 +67,7 @@ const SignUp = () => {
                },
             }
          );
-      } catch (error) {
+      } catch {
          toast('An error occurred. Please try again.');
       } finally {
          setIsLoading(false);
