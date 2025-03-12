@@ -1,19 +1,17 @@
-'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-import { cn } from '@/lib/utils';
-import { authRoutes, navConfig } from '@/utils/navigation-config';
 
 import MobileNav from './mobile-nav';
 
 import { Button } from './ui/button';
-import { useAuthState } from '@/hooks/useAuthState';
 import { MapPin } from 'lucide-react';
 
-export default function Navbar() {
-   const { isAuthenticated, user, logout } = useAuthState();
-   const pathname = usePathname();
+import { firstLetter } from '@/lib/helpers';
+import { authRoutes, navConfig } from '@/utils/navigation-config';
+import { getSession, signOutAction } from '@/actions/authActions';
+
+export default async function Navbar() {
+   const session = await getSession();
+   const userName = session?.user?.name;
 
    return (
       <>
@@ -31,23 +29,13 @@ export default function Navbar() {
 
                <div className='space-x-8 hidden md:flex items-center'>
                   {navConfig.map((item) => {
-                     const isActive =
-                        pathname === item.path ||
-                        (item.path !== '/' && pathname.startsWith(item.path));
-
                      return (
                         <Link
                            key={item.path}
                            href={item.path}
-                           className={cn(
-                              'relative font-medium text-sm lowercase tracking-wide transition-colors duration-200',
-                              isActive ? 'text-primary' : 'text-gray-700 hover:text-primary'
-                           )}
+                           className='relative text-gray-600 hover:text-gray-800 font-medium'
                         >
                            {item.title.toLowerCase()}
-                           {isActive && (
-                              <span className='absolute -bottom-1.5 left-0 w-full h-0.5 bg-primary rounded-full' />
-                           )}
                         </Link>
                      );
                   })}
@@ -55,15 +43,21 @@ export default function Navbar() {
 
                {/* Desktop auth UI */}
                <div className='hidden md:block'>
-                  {isAuthenticated ? (
+                  {session ? (
                      <div className='flex items-center gap-2'>
                         <div className='bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium'>
-                           {getInitials(user?.name || 'User')}
+                           {firstLetter(userName as string).toUpperCase()}
                         </div>
-
-                        <Button variant='ghost' size='sm' onClick={() => logout()}>
-                           Sign Out
-                        </Button>
+                        <form action={signOutAction}>
+                           <Button
+                              className='cursor-pointer'
+                              variant='ghost'
+                              size='sm'
+                              type='submit'
+                           >
+                              Sign Out
+                           </Button>
+                        </form>
                      </div>
                   ) : (
                      <div className='space-x-2'>
@@ -77,17 +71,15 @@ export default function Navbar() {
                </div>
 
                <div className='md:hidden'>
-                  {isAuthenticated ? (
+                  {session ? (
                      <div className='bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium'>
-                        {getInitials(user?.name || 'User')}
+                        {firstLetter(userName as string).toUpperCase()}
                      </div>
                   ) : (
-                     <div className='flex space-x-2'>
+                     <div className='space-x-2'>
                         {authRoutes.map((item) => (
-                           <Button key={item.path} size='sm' className='bg-blue-600' asChild>
-                              <Link href={item.path}>
-                                 {item.title === 'Sign In' ? 'Sign In' : 'Sign Up'}
-                              </Link>
+                           <Button key={item.path} asChild className='cursor-pointer'>
+                              <Link href={item.path}>{item.title}</Link>
                            </Button>
                         ))}
                      </div>
@@ -98,13 +90,4 @@ export default function Navbar() {
          <MobileNav />
       </>
    );
-}
-
-function getInitials(name: string): string {
-   return name
-      .split(' ')
-      .map((part) => part[0])
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
 }

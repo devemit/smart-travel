@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 import { z } from 'zod';
@@ -28,8 +28,11 @@ import {
    FormMessage,
 } from '@/components/ui/form';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 const SignIn = () => {
+   const [isLoading, setIsLoading] = useState(false);
+
    const form = useForm<z.infer<typeof signInFormSchema>>({
       resolver: zodResolver(signInFormSchema),
       defaultValues: {
@@ -40,24 +43,32 @@ const SignIn = () => {
 
    async function onSubmit(values: z.infer<typeof signInFormSchema>) {
       const { email, password } = values;
-      const {} = await authClient.signIn.email(
-         {
-            email,
-            password,
-            callbackURL: '/dashboard',
-         },
-         {
-            onRequest: () => {
-               toast('Logging in...');
+      setIsLoading(true);
+
+      try {
+         const {} = await authClient.signIn.email(
+            {
+               email,
+               password,
+               callbackURL: '/dashboard',
             },
-            onSuccess: () => {
-               form.reset();
-            },
-            onError: (ctx) => {
-               toast(ctx.error.message);
-            },
-         }
-      );
+            {
+               onRequest: () => {
+                  toast('Logging in...');
+               },
+               onSuccess: () => {
+                  form.reset();
+               },
+               onError: (ctx) => {
+                  toast(ctx.error.message);
+               },
+            }
+         );
+      } catch (error) {
+         toast('An error occurred. Please try again.');
+      } finally {
+         setIsLoading(false);
+      }
    }
 
    return (
@@ -105,8 +116,15 @@ const SignIn = () => {
                            </FormItem>
                         )}
                      />
-                     <Button className='w-full' type='submit'>
-                        Submit
+                     <Button className='w-full' type='submit' disabled={isLoading}>
+                        {isLoading ? (
+                           <>
+                              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                              Logging in...
+                           </>
+                        ) : (
+                           'Login'
+                        )}
                      </Button>
                   </form>
                </Form>

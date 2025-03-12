@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 import { z } from 'zod';
@@ -28,8 +28,12 @@ import {
    FormMessage,
 } from '@/components/ui/form';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
 const SignUp = () => {
+   const [isLoading, setIsLoading] = useState(false);
+
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -41,25 +45,34 @@ const SignUp = () => {
 
    async function onSubmit(values: z.infer<typeof formSchema>) {
       const { name, email, password } = values;
-      const {} = await authClient.signUp.email(
-         {
-            email,
-            password,
-            name,
-            callbackURL: '/signin',
-         },
-         {
-            onRequest: () => {
-               toast('Creating your account...');
+      setIsLoading(true);
+
+      try {
+         const {} = await authClient.signUp.email(
+            {
+               email,
+               password,
+               name,
+               callbackURL: '/signin',
             },
-            onSuccess: () => {
-               form.reset();
-            },
-            onError: (ctx) => {
-               toast(ctx.error.message);
-            },
-         }
-      );
+            {
+               onRequest: () => {
+                  toast('Creating your account...');
+               },
+               onSuccess: () => {
+                  form.reset();
+               },
+               onError: (ctx) => {
+                  toast(ctx.error.message);
+               },
+            }
+         );
+      } catch (error) {
+         toast('An error occurred. Please try again.');
+      } finally {
+         setIsLoading(false);
+         redirect('/signin');
+      }
    }
 
    return (
@@ -118,8 +131,15 @@ const SignUp = () => {
                            </FormItem>
                         )}
                      />
-                     <Button className='w-full' type='submit'>
-                        Sign up
+                     <Button className='w-full' type='submit' disabled={isLoading}>
+                        {isLoading ? (
+                           <>
+                              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                              Creating Account...
+                           </>
+                        ) : (
+                           'Sign Up'
+                        )}
                      </Button>
                   </form>
                </Form>

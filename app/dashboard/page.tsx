@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,19 +10,20 @@ import {
    MapIcon,
    UserIcon,
 } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { capitalizeFirstLetter, getGreeting } from '@/lib/helpers';
+import { getSession } from '@/actions/authActions';
 
-const Dashboard = () => {
-   const userName = 'Traveler';
+const Dashboard = async () => {
+   const session = await getSession();
+   const userName = session?.user?.name;
 
-   const getGreeting = () => {
-      const hour = new Date().getHours();
-      if (hour < 12) return 'Good morning';
-      if (hour < 18) return 'Good afternoon';
-      return 'Good evening';
-   };
+   if (!session) {
+      return redirect('/');
+   }
 
    return (
-      <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
+      <div className='min-h-screen dark:bg-gray-900'>
          {/* Welcome section */}
          <main className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
             <Card className='mb-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white'>
@@ -35,7 +34,7 @@ const Dashboard = () => {
                      </div>
                      <div>
                         <h2 className='text-2xl font-bold'>
-                           {getGreeting()}, {userName}!
+                           {getGreeting()}, {capitalizeFirstLetter(userName as string)}!
                         </h2>
                         <p className='mt-1 opacity-90'>
                            Welcome to your travel dashboard. Your journey begins here.
