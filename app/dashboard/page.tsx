@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,8 +14,6 @@ import {
 } from 'lucide-react';
 
 const Dashboard = () => {
-   const router = useRouter();
-
    const userName = 'Traveler';
 
    const getGreeting = () => {
