@@ -8,7 +8,7 @@ import PopularCities from './(components)/popular-cities';
 
 export const metadata: Metadata = {
    title: 'Weather - Smart Travel',
-   description: 'Check weather forecasts for your travel destinations',
+   description: 'Check weather forecasts for your travel destinations.',
 };
 
 export default function Weather() {
