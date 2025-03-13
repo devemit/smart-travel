@@ -4,8 +4,11 @@ import { NextResponse } from 'next/server';
 export function middleware(request: { headers: { get: (arg0: string) => any }; method: string }) {
    const response = NextResponse.next();
 
-   // Define allowed origins
-   const allowedOrigins = ['https://your-frontend-domain.com', 'https://another-domain.com'];
+   // Define allowed origins for both local and production
+   const allowedOrigins = [
+      'http://localhost:3000', // Local development
+      'https://easy-travel-pro.vercel.app/', // Production domain
+   ];
    const origin = request.headers.get('origin');
 
    // Add CORS headers
@@ -18,7 +21,11 @@ export function middleware(request: { headers: { get: (arg0: string) => any }; m
    // Handle preflight requests
    if (request.method === 'OPTIONS') {
       return new NextResponse(null, {
-         headers: response.headers,
+         headers: {
+            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+         },
       });
    }
 
