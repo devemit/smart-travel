@@ -4,11 +4,39 @@ import { Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
+import { searchWeather } from '@/actions/weatherAction';
 
-const recentSearches = ['Tokyo, Japan', 'Paris, France', 'New York, USA', 'London, UK'];
-
-export default function WeatherSearch() {
+export default function WeatherSearch({ onWeatherData }: { onWeatherData: (data: any) => void }) {
    const [searchTerm, setSearchTerm] = useState('');
+   const [isLoading, setIsLoading] = useState(false);
+   const [error, setError] = useState<string | null>(null);
+
+   const handleSearch = async () => {
+      if (!searchTerm.trim()) return;
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
+         const result = await searchWeather(searchTerm);
+         if (result.success) {
+            onWeatherData(result.data);
+         } else {
+            setError(result.error || 'Failed to fetch weather data');
+         }
+      } catch (error) {
+         setError('Failed to fetch weather data');
+      } finally {
+         setIsLoading(false);
+      }
+      setSearchTerm('');
+   };
+
+   const handleKeyPress = (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter') {
+         handleSearch();
+      }
+   };
 
    return (
       <div className='bg-white rounded-xl shadow-lg p-4 sm:p-6 mt-6 sm:mt-8'>
@@ -23,30 +51,20 @@ export default function WeatherSearch() {
                   className='pl-10'
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyPress={handleKeyPress}
                />
             </div>
-            <Button className='bg-primary hover:bg-primary/90 text-white flex gap-2 items-center'>
+            <Button
+               className='bg-primary hover:bg-primary/90 text-white flex gap-2 items-center'
+               onClick={handleSearch}
+               disabled={isLoading}
+            >
                <Search size={16} />
-               Get Weather
+               {isLoading ? 'Loading...' : 'Get Weather'}
             </Button>
          </div>
 
-         {recentSearches.length > 0 && (
-            <div className='mt-3 sm:mt-4'>
-               <p className='text-xs sm:text-sm text-gray-500 mb-2'>Recent searches:</p>
-               <div className='flex flex-wrap gap-1 sm:gap-2'>
-                  {recentSearches.map((search) => (
-                     <button
-                        key={search}
-                        className='px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs sm:text-sm text-gray-700 transition-colors'
-                        onClick={() => setSearchTerm(search)}
-                     >
-                        {search}
-                     </button>
-                  ))}
-               </div>
-            </div>
-         )}
+         {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
       </div>
    );
 }

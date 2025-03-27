@@ -45,7 +45,7 @@ export default async function Navbar() {
                <div className='hidden md:block'>
                   {session ? (
                      <div className='flex items-center gap-2'>
-                        <div className='bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium'>
+                        <div className='bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-md font-medium'>
                            {firstLetter(userName as string).toUpperCase()}
                         </div>
                         <form action={signOutAction}>
