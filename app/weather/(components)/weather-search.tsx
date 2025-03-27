@@ -5,27 +5,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { searchWeather } from '@/actions/weatherAction';
+import { WeatherData } from '@/types/weather';
 
-export default function WeatherSearch({ onWeatherData }: { onWeatherData: (data: any) => void }) {
+export default function WeatherSearch({
+   onWeatherData,
+}: {
+   onWeatherData: (data: WeatherData) => void;
+}) {
    const [searchTerm, setSearchTerm] = useState('');
    const [isLoading, setIsLoading] = useState(false);
-   const [error, setError] = useState<string | null>(null);
 
    const handleSearch = async () => {
       if (!searchTerm.trim()) return;
 
       setIsLoading(true);
-      setError(null);
 
       try {
          const result = await searchWeather(searchTerm);
          if (result.success) {
             onWeatherData(result.data);
-         } else {
-            setError(result.error || 'Failed to fetch weather data');
          }
       } catch (error) {
-         setError('Failed to fetch weather data');
+         console.error('Error fetching weather data:', error);
       } finally {
          setIsLoading(false);
       }
@@ -63,8 +64,6 @@ export default function WeatherSearch({ onWeatherData }: { onWeatherData: (data:
                {isLoading ? 'Loading...' : 'Get Weather'}
             </Button>
          </div>
-
-         {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
       </div>
    );
 }
