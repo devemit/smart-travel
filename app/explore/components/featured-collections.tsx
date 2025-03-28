@@ -114,7 +114,7 @@ const collections = [
 ];
 
 export default function FeaturedCollections({ activeCategory }: FeaturedCollectionsProps) {
-   const [hoveredCollection, setHoveredCollection] = useState<number | null>(null);
+   const [_, setHoveredCollection] = useState<number | null>(null);
 
    const filteredCollections = collections.filter(
       (collection) => activeCategory === 'all' || collection.category === activeCategory

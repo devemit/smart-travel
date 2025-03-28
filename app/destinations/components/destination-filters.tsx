@@ -9,26 +9,6 @@ import { SlidersHorizontal, Grid, Map } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-const categories = [
-   { id: 'all', name: 'All' },
-   { id: 'popular', name: 'Popular' },
-   { id: 'trending', name: 'Trending' },
-   { id: 'beach', name: 'Beaches' },
-   { id: 'mountain', name: 'Mountains' },
-   { id: 'city', name: 'Cities' },
-   { id: 'countryside', name: 'Countryside' },
-   { id: 'historical', name: 'Historical' },
-];
-
-const regions = [
-   { id: 'global', name: 'Global' },
-   { id: 'europe', name: 'Europe' },
-   { id: 'asia', name: 'Asia' },
-   { id: 'americas', name: 'Americas' },
-   { id: 'africa', name: 'Africa' },
-   { id: 'oceania', name: 'Oceania' },
-];
-
 export default function DestinationFilters() {
    const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
    const [showTooltip, setShowTooltip] = useState(false);
