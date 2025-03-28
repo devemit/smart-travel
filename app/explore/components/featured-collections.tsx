@@ -114,7 +114,7 @@ const collections = [
 ];
 
 export default function FeaturedCollections({ activeCategory }: FeaturedCollectionsProps) {
-   const [_, setHoveredCollection] = useState<number | null>(null);
+   const [hoveredCollection, setHoveredCollection] = useState<number | null>(null);
 
    const filteredCollections = collections.filter(
       (collection) => activeCategory === 'all' || collection.category === activeCategory
@@ -124,6 +124,7 @@ export default function FeaturedCollections({ activeCategory }: FeaturedCollecti
       <section className='max-w-full overflow-hidden'>
          <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6'>
             <h2 className='text-2xl font-bold'>Featured Collections</h2>
+            <span className='hidden'>{hoveredCollection}</span>
          </div>
 
          <div className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6'>
