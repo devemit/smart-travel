@@ -3,28 +3,31 @@
 import { Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getForecastWeather, searchWeather } from '@/actions/weatherAction';
 import { ForecastData, WeatherData } from '@/types/weather';
 
 export default function WeatherSearch({
    onWeatherData,
    onForecastData,
+   reccomendation,
 }: {
    onWeatherData: (data: WeatherData) => void;
    onForecastData: (data: ForecastData) => void;
+   reccomendation: string;
 }) {
    const [searchTerm, setSearchTerm] = useState('');
    const [isLoading, setIsLoading] = useState(false);
 
-   const handleSearch = async () => {
-      if (!searchTerm.trim()) return;
+   const handleSearch = async (term?: string) => {
+      const searchValue = term || searchTerm;
+      if (!searchValue.trim()) return;
 
       setIsLoading(true);
 
       try {
-         const result = await searchWeather(searchTerm);
-         const forecast = await getForecastWeather(searchTerm);
+         const result = await searchWeather(searchValue);
+         const forecast = await getForecastWeather(searchValue);
          if (result.success) {
             onWeatherData(result.data);
             onForecastData(forecast);
@@ -34,7 +37,9 @@ export default function WeatherSearch({
       } finally {
          setIsLoading(false);
       }
-      setSearchTerm('');
+      if (!term) {
+         setSearchTerm('');
+      }
    };
 
    const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -42,6 +47,12 @@ export default function WeatherSearch({
          handleSearch();
       }
    };
+
+   useEffect(() => {
+      if (reccomendation && !searchTerm) {
+         handleSearch(reccomendation);
+      }
+   }, [reccomendation]);
 
    return (
       <div className='bg-white rounded-xl shadow-lg p-4 sm:p-6 mt-6 sm:mt-8'>
@@ -54,14 +65,21 @@ export default function WeatherSearch({
                <Input
                   placeholder='Enter city or location'
                   className='pl-10'
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  value={searchTerm || reccomendation}
+                  onChange={(e) => {
+                     if (!e.target.value) {
+                        setSearchTerm('');
+                        handleSearch(reccomendation);
+                     } else {
+                        setSearchTerm(e.target.value);
+                     }
+                  }}
                   onKeyPress={handleKeyPress}
                />
             </div>
             <Button
                className='bg-primary hover:bg-primary/90 text-white flex gap-2 items-center'
-               onClick={handleSearch}
+               onClick={() => handleSearch()}
                disabled={isLoading}
             >
                <Search size={16} />

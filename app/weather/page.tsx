@@ -12,6 +12,7 @@ import { ForecastData, WeatherData } from '@/types/weather';
 export default function Weather() {
    const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
    const [forecastData, setForecastData] = useState<ForecastData | undefined>(undefined);
+   const [popularCity, setPopularCity] = useState<string>('');
 
    return (
       <main className='flex flex-col min-h-screen overflow-hidden'>
@@ -25,7 +26,11 @@ export default function Weather() {
                   destinations around the world.
                </p>
 
-               <WeatherSearch onWeatherData={setWeatherData} onForecastData={setForecastData} />
+               <WeatherSearch
+                  onWeatherData={setWeatherData}
+                  onForecastData={setForecastData}
+                  reccomendation={popularCity}
+               />
             </div>
          </div>
 
@@ -37,7 +42,7 @@ export default function Weather() {
                </div>
                <div className='space-y-6 sm:space-y-8'>
                   <WeatherMap />
-                  <PopularCities />
+                  <PopularCities onCityClick={setPopularCity} />
                </div>
             </div>
          </div>
