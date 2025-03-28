@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { Check, SlidersHorizontal, Grid, Map } from 'lucide-react';
+import { SlidersHorizontal, Grid, Map } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const categories = [
    { id: 'all', name: 'All' },
@@ -31,24 +31,34 @@ const regions = [
 
 export default function DestinationFilters() {
    const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
-   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-   const [selectedRegion, setSelectedRegion] = useState<string>('global');
-   const [showFilters, setShowFilters] = useState<boolean>(false);
+   const [showTooltip, setShowTooltip] = useState(false);
 
    return (
       <div className='flex flex-col space-y-4'>
          <div className='flex justify-between items-center'>
             <h2 className='text-2xl font-bold'>Destinations</h2>
             <div className='flex items-center space-x-2'>
-               <Button
-                  variant='outline'
-                  size='sm'
-                  onClick={() => setShowFilters(!showFilters)}
-                  className='flex items-center gap-1'
-               >
-                  <SlidersHorizontal size={16} />
-                  <span className='hidden sm:inline'>Filters</span>
-               </Button>
+               <TooltipProvider>
+                  <Tooltip open={showTooltip} onOpenChange={setShowTooltip}>
+                     <TooltipTrigger asChild>
+                        <Button
+                           variant='outline'
+                           size='sm'
+                           className='flex items-center gap-1'
+                           onClick={() => setShowTooltip(true)}
+                        >
+                           <SlidersHorizontal size={16} />
+                           <span className='hidden sm:inline'>Filters</span>
+                        </Button>
+                     </TooltipTrigger>
+                     <TooltipContent side='bottom' className='bg-white text-black border shadow-lg'>
+                        <p className='font-medium'>Coming Soon!</p>
+                        <p className='text-sm text-gray-500'>
+                           Filters will be available in the next update.
+                        </p>
+                     </TooltipContent>
+                  </Tooltip>
+               </TooltipProvider>
                <div className='bg-gray-100 rounded-md p-1 flex'>
                   <button
                      onClick={() => setViewMode('grid')}
@@ -71,52 +81,6 @@ export default function DestinationFilters() {
                </div>
             </div>
          </div>
-
-         {showFilters && (
-            <Card className='p-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
-               <div>
-                  <h3 className='font-medium mb-2'>Categories</h3>
-                  <div className='flex flex-wrap gap-2'>
-                     {categories.map((category) => (
-                        <button
-                           key={category.id}
-                           onClick={() => setSelectedCategory(category.id)}
-                           className={cn(
-                              'px-3 py-1.5 rounded-full text-sm flex items-center gap-1',
-                              selectedCategory === category.id
-                                 ? 'bg-primary text-white'
-                                 : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                           )}
-                        >
-                           {selectedCategory === category.id && <Check size={14} />}
-                           <span>{category.name}</span>
-                        </button>
-                     ))}
-                  </div>
-               </div>
-
-               <div>
-                  <h3 className='font-medium mb-2'>Regions</h3>
-                  <div className='flex flex-wrap gap-2'>
-                     {regions.map((region) => (
-                        <button
-                           key={region.id}
-                           onClick={() => setSelectedRegion(region.id)}
-                           className={cn(
-                              'px-3 py-1.5 rounded-full text-sm flex items-center gap-1',
-                              selectedRegion === region.id
-                                 ? 'bg-primary text-white'
-                                 : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                           )}
-                        >
-                           {selectedRegion === region.id && <Check size={14} />}
-                           <span>{region.name}</span>
-                        </button>
-                     ))}
-                  </div>
-               </div>
-            </Card>
-         )}
       </div>
    );
 }

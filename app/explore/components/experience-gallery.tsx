@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+
 import { Star, Heart } from 'lucide-react';
 
 const experiences = [
@@ -114,15 +116,6 @@ export default function ExperienceGallery() {
                   </div>
                </div>
             ))}
-         </div>
-
-         <div className='mt-6 text-center'>
-            <Link
-               href='/experiences'
-               className='inline-flex px-6 py-2 border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-colors'
-            >
-               Browse All Experiences
-            </Link>
          </div>
       </section>
    );

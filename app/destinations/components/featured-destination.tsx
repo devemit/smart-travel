@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
-
-import { Star, MapPin, CalendarDays, Plane, Info } from 'lucide-react';
 
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+
+import { Star, MapPin, CalendarDays, Plane } from 'lucide-react';
 
 export default function FeaturedDestination() {
    const featuredDestination = {
@@ -69,21 +67,6 @@ export default function FeaturedDestination() {
             </div>
 
             <p className='text-gray-700 mb-6 break-words'>{featuredDestination.description}</p>
-
-            <div className='flex flex-col sm:flex-row gap-3'>
-               <Button className='w-full sm:w-auto' asChild>
-                  <Link href={`/destinations/${featuredDestination.id}`}>Plan a Trip</Link>
-               </Button>
-               <Button variant='outline' className='w-full sm:w-auto' asChild>
-                  <Link
-                     href={`/destinations/${featuredDestination.id}`}
-                     className='flex items-center justify-center'
-                  >
-                     <Info className='mr-1 h-4 w-4' />
-                     More Information
-                  </Link>
-               </Button>
-            </div>
          </div>
       </Card>
    );

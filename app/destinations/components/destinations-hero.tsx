@@ -1,7 +1,4 @@
-import { Search, Globe } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Globe } from 'lucide-react';
 
 export default function DestinationsHero() {
    return (
@@ -15,22 +12,6 @@ export default function DestinationsHero() {
             <p className='text-xl text-white/90 max-w-2xl mx-auto mb-8'>
                Find your perfect destination from hundreds of locations around the world
             </p>
-
-            <div className='max-w-2xl mx-auto bg-white/10 backdrop-blur-md p-4 rounded-xl'>
-               <div className='flex flex-col sm:flex-row gap-3'>
-                  <div className='relative flex-grow'>
-                     <Input
-                        placeholder='Search for destinations by name, country, or region'
-                        className='pr-10 bg-white'
-                     />
-                     <Search
-                        className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400'
-                        size={18}
-                     />
-                  </div>
-                  <Button className='bg-primary hover:bg-primary/90'>Find Destinations</Button>
-               </div>
-            </div>
          </div>
       </div>
    );

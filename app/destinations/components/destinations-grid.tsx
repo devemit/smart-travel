@@ -1,11 +1,14 @@
-import Image from 'next/image';
+'use client';
 
+import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
-import { Badge, MapPin, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const destinations = [
+import { Badge, MapPin, Star, Users } from 'lucide-react';
+
+const allDestinations = [
    {
       id: 1,
       name: 'Kyoto',
@@ -89,15 +92,107 @@ const destinations = [
       tags: ['Islands', 'Views', 'Romance'],
       popular: true,
    },
+   {
+      id: 7,
+      name: 'Bali',
+      country: 'Indonesia',
+      description:
+         'Tropical paradise with pristine beaches, ancient temples, and lush rice terraces.',
+      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2070&auto=format&fit=crop',
+      rating: 4.7,
+      reviews: 2456,
+      category: 'beach',
+      region: 'asia',
+      tags: ['Beaches', 'Culture', 'Nature'],
+      popular: true,
+   },
+   {
+      id: 8,
+      name: 'Reykjavik',
+      country: 'Iceland',
+      description:
+         "Northern lights, geothermal pools, and dramatic landscapes in the world's northernmost capital.",
+      image: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=2071&auto=format&fit=crop',
+      rating: 4.6,
+      reviews: 987,
+      category: 'city',
+      region: 'europe',
+      tags: ['Northern Lights', 'Hot Springs', 'Nature'],
+      trending: true,
+   },
+   {
+      id: 9,
+      name: 'Marrakech',
+      country: 'Morocco',
+      description: 'Vibrant city with historic medina, colorful souks, and stunning architecture.',
+      image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070&auto=format&fit=crop',
+      rating: 4.5,
+      reviews: 1567,
+      category: 'city',
+      region: 'africa',
+      tags: ['Culture', 'Shopping', 'Architecture'],
+      popular: true,
+   },
+   {
+      id: 10,
+      name: 'Sydney',
+      country: 'Australia',
+      description: 'Iconic harbor city with world-famous opera house and stunning coastal views.',
+      image: 'https://plus.unsplash.com/premium_photo-1697730198238-48ee2f2fe1b7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      rating: 4.8,
+      reviews: 1890,
+      category: 'city',
+      region: 'oceania',
+      tags: ['Beaches', 'Culture', 'Architecture'],
+      popular: true,
+   },
+   {
+      id: 11,
+      name: 'Rio de Janeiro',
+      country: 'Brazil',
+      description:
+         'Vibrant city with stunning beaches, iconic Christ the Redeemer, and carnival spirit.',
+      image: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmlvfGVufDB8fDB8fHww',
+      rating: 4.7,
+      reviews: 1678,
+      category: 'city',
+      region: 'americas',
+      tags: ['Beaches', 'Culture', 'Nature'],
+      trending: true,
+   },
+   {
+      id: 12,
+      name: 'Dubai',
+      country: 'UAE',
+      description: 'Ultra-modern city with record-breaking architecture and luxury experiences.',
+      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop',
+      rating: 4.6,
+      reviews: 1456,
+      category: 'city',
+      region: 'asia',
+      tags: ['Luxury', 'Shopping', 'Architecture'],
+      popular: true,
+   },
 ];
 
 export default function DestinationsGrid() {
+   const [displayedDestinations, setDisplayedDestinations] = useState(6);
+   const [isLoading, setIsLoading] = useState(false);
+
+   const handleLoadMore = () => {
+      setIsLoading(true);
+      // Simulate API call delay
+      setTimeout(() => {
+         setDisplayedDestinations((prev) => Math.min(prev + 6, allDestinations.length));
+         setIsLoading(false);
+      }, 1000);
+   };
+
    return (
       <section>
          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            {destinations.map((destination) => (
+            {allDestinations.slice(0, displayedDestinations).map((destination) => (
                <Link
-                  // href={`/destinations/${destination.id}`}
                   href='/destinations'
                   key={destination.id}
                   className='group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow'
@@ -162,9 +257,13 @@ export default function DestinationsGrid() {
             ))}
          </div>
 
-         <div className='mt-8 flex justify-center'>
-            <Button className='rounded-full px-8'>Load More Destinations</Button>
-         </div>
+         {displayedDestinations < allDestinations.length && (
+            <div className='mt-8 flex justify-center'>
+               <Button className='rounded-full px-8' onClick={handleLoadMore} disabled={isLoading}>
+                  {isLoading ? 'Loading...' : 'Load More Destinations'}
+               </Button>
+            </div>
+         )}
       </section>
    );
 }
