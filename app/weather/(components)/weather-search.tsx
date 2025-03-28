@@ -65,7 +65,7 @@ export default function WeatherSearch({
                <Input
                   placeholder='Enter city or location'
                   className='pl-10'
-                  value={searchTerm || reccomendation}
+                  value={searchTerm}
                   onChange={(e) => {
                      if (!e.target.value) {
                         setSearchTerm('');
