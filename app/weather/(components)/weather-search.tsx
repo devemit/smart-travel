@@ -4,13 +4,15 @@ import { Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { searchWeather } from '@/actions/weatherAction';
-import { WeatherData } from '@/types/weather';
+import { getForecastWeather, searchWeather } from '@/actions/weatherAction';
+import { ForecastData, WeatherData } from '@/types/weather';
 
 export default function WeatherSearch({
    onWeatherData,
+   onForecastData,
 }: {
    onWeatherData: (data: WeatherData) => void;
+   onForecastData: (data: ForecastData) => void;
 }) {
    const [searchTerm, setSearchTerm] = useState('');
    const [isLoading, setIsLoading] = useState(false);
@@ -22,8 +24,10 @@ export default function WeatherSearch({
 
       try {
          const result = await searchWeather(searchTerm);
+         const forecast = await getForecastWeather(searchTerm);
          if (result.success) {
             onWeatherData(result.data);
+            onForecastData(forecast);
          }
       } catch (error) {
          console.error('Error fetching weather data:', error);

@@ -29,3 +29,21 @@ export const searchWeather = async (city: string) => {
       };
    }
 };
+
+export const getForecastWeather = async (city: string) => {
+   if (!process.env.WEATHER_API_KEY) {
+      throw new Error('Weather API key is not configured');
+   }
+
+   const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${city}&days=5`
+   );
+
+   if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error?.message || 'Failed to fetch weather data');
+   }
+
+   const data = await response.json();
+   return data;
+};

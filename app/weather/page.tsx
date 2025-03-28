@@ -7,10 +7,11 @@ import CurrentWeather from './(components)/current-weather';
 import ForecastList from './(components)/forecast-list';
 import WeatherMap from './(components)/weather-map';
 import PopularCities from './(components)/popular-cities';
-import { WeatherData } from '@/types/weather';
+import { ForecastData, WeatherData } from '@/types/weather';
 
 export default function Weather() {
    const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
+   const [forecastData, setForecastData] = useState<ForecastData | undefined>(undefined);
 
    return (
       <main className='flex flex-col min-h-screen overflow-hidden'>
@@ -24,7 +25,7 @@ export default function Weather() {
                   destinations around the world.
                </p>
 
-               <WeatherSearch onWeatherData={setWeatherData} />
+               <WeatherSearch onWeatherData={setWeatherData} onForecastData={setForecastData} />
             </div>
          </div>
 
@@ -32,7 +33,7 @@ export default function Weather() {
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8'>
                <div className='lg:col-span-2 space-y-6 sm:space-y-8'>
                   <CurrentWeather weatherData={weatherData} />
-                  <ForecastList />
+                  <ForecastList forecastData={forecastData} />
                </div>
                <div className='space-y-6 sm:space-y-8'>
                   <WeatherMap />
