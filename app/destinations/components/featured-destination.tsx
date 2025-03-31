@@ -7,13 +7,13 @@ import { Star, MapPin, CalendarDays, Plane } from 'lucide-react';
 export default function FeaturedDestination() {
    const featuredDestination = {
       id: 7,
-      name: 'Bali',
-      country: 'Indonesia',
+      name: 'Paris',
+      country: 'France',
       description:
-         'A tropical paradise known for its stunning beaches, lush rice terraces, vibrant culture and spiritual temples. From bustling Kuta to serene Ubud, Bali offers a perfect blend of relaxation, adventure, and cultural immersion.',
-      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2938&auto=format&fit=crop',
+         'The City of Light, known for its iconic Eiffel Tower, world-class museums like the Louvre, and romantic atmosphere. From historic architecture to haute cuisine, Paris offers a perfect blend of culture, art, and French charm.',
+      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2070&auto=format&fit=crop',
       bestTime: 'April to October',
-      flightTime: '16+ hours from US',
+      flightTime: '7+ hours from US',
       rating: 4.8,
       reviews: 3245,
    };

@@ -8,21 +8,22 @@ const trendingDestinations = [
    {
       id: 1,
       name: 'Lisbon, Portugal',
-      image: 'https://plus.unsplash.com/premium_photo-1672116453103-a38879a3ef0a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGlzYm9ufGVufDB8fDB8fHww',
+      image: 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a?q=80&w=2070&auto=format&fit=crop',
       trend: '+32% interest this month',
       description: "Historic charm meets coastal beauty in Portugal's vibrant capital",
    },
    {
       id: 2,
-      name: 'Kyoto, Japan',
-      image: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2070&auto=format&fit=crop',
+      name: 'Copenhagen, Denmark',
+      image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=2070&auto=format&fit=crop',
       trend: '+28% interest this month',
-      description: "Traditional temples, gardens and geisha districts in Japan's cultural heart",
+      description:
+         "Scandinavian design, world-class cuisine, and cycling culture in Denmark's capital",
    },
    {
       id: 3,
       name: 'Santorini, Greece',
-      image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=2062&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1613395877347-5d4a0f8d9c8d?q=80&w=2070&auto=format&fit=crop',
       trend: '+25% interest this month',
       description: 'Iconic white-washed buildings on dramatic cliffs overlooking the Aegean Sea',
    },

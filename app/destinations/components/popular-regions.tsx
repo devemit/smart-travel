@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -45,11 +44,9 @@ export default function PopularRegions() {
          <CardContent className='p-0'>
             <div className='space-y-4'>
                {regions.map((region) => (
-                  <Link
+                  <div
                      key={region.name}
-                     // href={`/destinations?region=${region.name.toLowerCase()}`}
-                     href='/destinations'
-                     className='flex items-center p-4 hover:bg-gray-50 transition-colors'
+                     className='flex items-center p-4 hover:bg-gray-50 transition-colors cursor-pointer'
                   >
                      <div className='relative h-16 w-16 rounded-md overflow-hidden flex-shrink-0'>
                         <Image src={region.image} alt={region.name} fill className='object-cover' />
@@ -62,7 +59,7 @@ export default function PopularRegions() {
                         <span className='text-sm font-medium'>{region.destinations}</span>
                         <span className='text-xs text-gray-500 block'>destinations</span>
                      </div>
-                  </Link>
+                  </div>
                ))}
             </div>
          </CardContent>
