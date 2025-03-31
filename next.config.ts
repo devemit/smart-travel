@@ -24,10 +24,7 @@ const nextConfig: NextConfig = {
             headers: [
                {
                   key: 'Access-Control-Allow-Origin',
-                  value:
-                     process.env.NODE_ENV === 'production'
-                        ? process.env.NEXT_PUBLIC_SITE_URL || '*'
-                        : 'http://localhost:3000',
+                  value: '*',
                },
                {
                   key: 'Access-Control-Allow-Methods',
@@ -35,7 +32,7 @@ const nextConfig: NextConfig = {
                },
                {
                   key: 'Access-Control-Allow-Headers',
-                  value: 'Content-Type, Authorization',
+                  value: 'Content-Type, Authorization, X-Requested-With',
                },
                {
                   key: 'Access-Control-Allow-Credentials',

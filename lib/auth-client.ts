@@ -6,8 +6,9 @@ const getBaseUrl = () => {
       return process.env.NEXT_PUBLIC_SITE_URL;
    }
 
-   if (process.env.NODE_ENV === 'production') {
-      return 'https://smart-travel-devemits-projects.vercel.app';
+   if (typeof window !== 'undefined') {
+      // Use the current window location in production
+      return window.location.origin;
    }
 
    return 'http://localhost:3000';
