@@ -1,15 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import {
-   CalendarIcon,
-   CreditCardIcon,
-   GlobeIcon,
-   HomeIcon,
-   LuggageIcon,
-   MapIcon,
-   UserIcon,
-} from 'lucide-react';
+import { CalendarIcon, GlobeIcon, LuggageIcon, MapIcon, UserIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { capitalizeFirstLetter, getGreeting } from '@/lib/helpers';
 import { getSession } from '@/actions/authActions';
@@ -87,69 +79,36 @@ const Dashboard = async () => {
                </Card>
             </div>
 
-            {/* Main sections */}
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-               {/* Trip suggestions */}
-               <Card className='lg:col-span-2'>
-                  <CardContent className='p-6'>
-                     <h2 className='text-xl font-bold mb-4'>Suggested Destinations</h2>
-                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                        {[
-                           {
-                              name: 'Barcelona, Spain',
-                              image: 'barcelona.jpg',
-                              discount: '15% off',
-                           },
-                           { name: 'Bali, Indonesia', image: 'bali.jpg', discount: '10% off' },
-                           { name: 'Tokyo, Japan', image: 'tokyo.jpg', discount: '20% off' },
-                           {
-                              name: 'Santorini, Greece',
-                              image: 'santorini.jpg',
-                              discount: '12% off',
-                           },
-                        ].map((destination) => (
-                           <div
-                              key={destination.name}
-                              className='group relative rounded-lg overflow-hidden h-44 cursor-pointer'
-                           >
-                              <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10'></div>
-                              <div className='absolute top-2 right-2 bg-yellow-500 text-xs font-bold px-2 py-1 rounded-full z-20'>
-                                 {destination.discount}
-                              </div>
-                              <div className='absolute bottom-3 left-3 text-white z-20'>
-                                 <p className='font-bold'>{destination.name}</p>
-                                 <p className='text-xs opacity-80'>Best time to visit: May-Oct</p>
-                              </div>
-                              <div className='absolute inset-0 bg-gray-300 animate-pulse'></div>
-                           </div>
-                        ))}
+            {/* Main section - Plan Trip Card */}
+            <div className='mt-8'>
+               <Card className='bg-gradient-to-r from-blue-600 to-indigo-700 text-white overflow-hidden'>
+                  <CardContent className='p-8 relative'>
+                     <div className='absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2'></div>
+                     <div className='relative z-10'>
+                        <h2 className='text-2xl font-bold mb-4'>Plan Your Next Adventure</h2>
+                        <p className='mb-6 max-w-md'>
+                           Create a personalized travel itinerary with our AI-powered trip planner.
+                           Tell us your preferences and we'll craft the perfect journey for you.
+                        </p>
+                        <Button
+                           size='lg'
+                           className='bg-white text-blue-700 hover:bg-blue-50 font-medium'
+                           asChild
+                        >
+                           <a href='/plan-trip'>
+                              <MapIcon className='mr-2 h-5 w-5' /> Start Planning Your Trip
+                           </a>
+                        </Button>
                      </div>
-                     <Button variant='outline' className='w-full mt-4'>
-                        View All Destinations
-                     </Button>
                   </CardContent>
                </Card>
+            </div>
 
-               {/* Quick actions */}
+            {/* Travel Tip */}
+            <div className='mt-6'>
                <Card>
                   <CardContent className='p-6'>
-                     <h2 className='text-xl font-bold mb-4'>Quick Actions</h2>
-                     <div className='space-y-3'>
-                        <Button className='w-full justify-start' variant='outline'>
-                           <MapIcon className='mr-2 h-4 w-4' /> Plan New Trip
-                        </Button>
-                        <Button className='w-full justify-start' variant='outline'>
-                           <HomeIcon className='mr-2 h-4 w-4' /> Book Accommodation
-                        </Button>
-                        <Button className='w-full justify-start' variant='outline'>
-                           <CreditCardIcon className='mr-2 h-4 w-4' /> Manage Payment Methods
-                        </Button>
-                        <Button className='w-full justify-start' variant='outline'>
-                           <UserIcon className='mr-2 h-4 w-4' /> Update Profile
-                        </Button>
-                     </div>
-
-                     <div className='mt-6 bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg'>
+                     <div className='bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg'>
                         <h3 className='font-medium text-blue-700 dark:text-blue-300 mb-2'>
                            Travel Tip
                         </h3>
