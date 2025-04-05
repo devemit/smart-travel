@@ -26,23 +26,9 @@ export const navConfig: NavRoute[] = [
       title: 'About',
       path: '/about',
    },
-];
-
-export const protectedRoutes: NavRoute[] = [
    {
-      title: 'My Trips',
-      path: '/trips',
-      isProtected: true,
-      children: [
-         {
-            title: 'All Trips',
-            path: '/trips',
-         },
-         {
-            title: 'Create Trip',
-            path: '/trips/create',
-         },
-      ],
+      title: 'Dashboard',
+      path: '/dashboard',
    },
 ];
 

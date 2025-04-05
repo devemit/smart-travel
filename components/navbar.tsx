@@ -29,6 +29,8 @@ export default async function Navbar() {
 
                <div className='space-x-8 hidden md:flex items-center'>
                   {navConfig.map((item) => {
+                     if (item.path === '/dashboard' && !session) return;
+
                      return (
                         <Link
                            key={item.path}
