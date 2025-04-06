@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,10 +30,10 @@ import {
 } from '@/components/ui/form';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
-import { redirect } from 'next/navigation';
 
 const SignUp = () => {
    const [isLoading, setIsLoading] = useState(false);
+   const router = useRouter();
 
    const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
@@ -58,10 +59,10 @@ const SignUp = () => {
             },
             {
                onRequest: () => {
-                  toast('Creating your account...');
+                  // toast('Creating your account...');
                },
                onSuccess: () => {
-                  form.reset();
+                  router.push('/signin');
                },
                onError: (ctx) => {
                   toast(ctx.error.message);
@@ -72,7 +73,6 @@ const SignUp = () => {
          toast('An error occurred. Please try again.');
       } finally {
          setIsLoading(false);
-         redirect('/signin');
       }
    }
 

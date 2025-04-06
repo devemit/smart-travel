@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -32,6 +33,7 @@ import { Loader2 } from 'lucide-react';
 
 const SignIn = () => {
    const [isLoading, setIsLoading] = useState(false);
+   const router = useRouter();
 
    const form = useForm<z.infer<typeof signInFormSchema>>({
       resolver: zodResolver(signInFormSchema),
@@ -54,10 +56,10 @@ const SignIn = () => {
             },
             {
                onRequest: () => {
-                  toast('Logging in...');
+                  // toast('Logging in...');
                },
                onSuccess: () => {
-                  form.reset();
+                  router.push('/dashboard');
                },
                onError: (ctx) => {
                   toast(ctx.error.message);
