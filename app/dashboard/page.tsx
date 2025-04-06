@@ -1,6 +1,5 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
-import Image from 'next/image';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -33,7 +32,6 @@ const Dashboard = async () => {
 
    return (
       <div className='min-h-screen dark:bg-gray-900 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800'>
-         {/* Welcome section */}
          <main className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
             <Card className='mb-8 overflow-hidden border-0 shadow-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white transform hover:scale-[1.01] transition-transform duration-300'>
                <div className='absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2'></div>
