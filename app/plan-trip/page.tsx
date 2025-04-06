@@ -43,8 +43,9 @@ import {
 import { getSession } from '@/actions/authActions';
 import { generateTripPlan } from '@/actions/tripAction';
 import { cleanTripPlan, formatTripPlan } from '@/helpers/formatPropmt';
+import { Trip } from '@/types/trip';
 
-const TripPlanDisplay = ({ tripPlan, formData }: { tripPlan: string; formData: any }) => {
+const TripPlanDisplay = ({ tripPlan, formData }: { tripPlan: string; formData: Trip }) => {
    const handleExportAsText = () => {
       const element = document.createElement('a');
       const file = new Blob([tripPlan], { type: 'text/plain' });
