@@ -84,11 +84,11 @@ function Calendar({ selected, onSelect, className, disabled }: CalendarProps) {
                onClick={goToPreviousMonth}
                className={cn(
                   buttonVariants({ variant: 'outline' }),
-                  'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+                  'h-8 w-8 p-0 flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground'
                )}
                disabled={disabled}
             >
-               <ChevronLeft className='h-4 w-4' />
+               <ChevronLeft />
             </button>
             <div className='text-sm font-medium'>
                {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
@@ -98,11 +98,11 @@ function Calendar({ selected, onSelect, className, disabled }: CalendarProps) {
                onClick={goToNextMonth}
                className={cn(
                   buttonVariants({ variant: 'outline' }),
-                  'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+                  'h-8 w-8 p-0 flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground'
                )}
                disabled={disabled}
             >
-               <ChevronRight className='h-4 w-4' />
+               <ChevronRight />
             </button>
          </div>
 
