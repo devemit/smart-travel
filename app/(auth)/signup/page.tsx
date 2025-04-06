@@ -40,11 +40,12 @@ const SignUp = () => {
          name: '',
          email: '',
          password: '',
+         confirmPassword: '',
       },
    });
 
    async function onSubmit(values: z.infer<typeof formSchema>) {
-      const { name, email, password } = values;
+      const { name, email, password, confirmPassword } = values;
       setIsLoading(true);
 
       try {
@@ -123,7 +124,26 @@ const SignUp = () => {
                               <FormControl>
                                  <Input
                                     type='password'
+                                    viewPassword
                                     placeholder='Create a strong password'
+                                    {...field}
+                                 />
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
+                     />
+                     <FormField
+                        control={form.control}
+                        name='confirmPassword'
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormLabel>Confirm Password</FormLabel>
+                              <FormControl>
+                                 <Input
+                                    type='password'
+                                    viewPassword
+                                    placeholder='Confirm your password'
                                     {...field}
                                  />
                               </FormControl>

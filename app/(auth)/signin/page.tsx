@@ -109,6 +109,7 @@ const SignIn = () => {
                                  <Input
                                     type='password'
                                     placeholder='Enter your password'
+                                    viewPassword
                                     {...field}
                                  />
                               </FormControl>
