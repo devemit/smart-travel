@@ -49,7 +49,7 @@ const PlanTripPage = () => {
       destination: '',
       startDate: '',
       endDate: '',
-      budget: 5000,
+      budget: 2400,
       travelers: 2,
       preferences: '',
    });
