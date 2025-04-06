@@ -21,16 +21,82 @@ import { Textarea } from '@/components/ui/textarea';
 import { Slider } from '@/components/ui/slider';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
-import { CalendarIcon, DollarSignIcon, UsersIcon, SearchIcon, Loader2 } from 'lucide-react';
+import {
+   CalendarIcon,
+   DollarSignIcon,
+   UsersIcon,
+   SearchIcon,
+   Loader2,
+   DownloadIcon,
+   FileTextIcon,
+   MailIcon,
+   PrinterIcon,
+} from 'lucide-react';
 
 import { getSession } from '@/actions/authActions';
 import { generateTripPlan } from '@/actions/tripAction';
 import { cleanTripPlan, formatTripPlan } from '@/helpers/formatPropmt';
 
-const TripPlanDisplay = ({ tripPlan }: { tripPlan: string }) => {
+const TripPlanDisplay = ({ tripPlan, formData }: { tripPlan: string; formData: any }) => {
+   const handleExportAsText = () => {
+      const element = document.createElement('a');
+      const file = new Blob([tripPlan], { type: 'text/plain' });
+      element.href = URL.createObjectURL(file);
+      element.download = `trip-plan-${formData.destination}-${dayjs().format('YYYY-MM-DD')}.txt`;
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+   };
+
+   const handleExportAsPDF = () => {
+      alert('PDF export functionality will be implemented soon!');
+   };
+
+   const handleEmailPlan = () => {
+      alert('Email functionality will be implemented soon!');
+   };
+
+   const handlePrintPlan = () => {
+      window.print();
+   };
+
    return (
       <div className='prose prose-sm max-w-none'>
+         <div className='flex justify-start p-4'>
+            <DropdownMenu>
+               <DropdownMenuTrigger asChild>
+                  <Button variant='outline' size='sm'>
+                     <DownloadIcon className='mr-2 h-4 w-4' />
+                     Export
+                  </Button>
+               </DropdownMenuTrigger>
+               <DropdownMenuContent align='end'>
+                  <DropdownMenuItem onClick={handleExportAsText}>
+                     <FileTextIcon className='mr-2 h-4 w-4' />
+                     Export as Text
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleExportAsPDF}>
+                     <FileTextIcon className='mr-2 h-4 w-4' />
+                     Export as PDF
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleEmailPlan}>
+                     <MailIcon className='mr-2 h-4 w-4' />
+                     Email Plan
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handlePrintPlan}>
+                     <PrinterIcon className='mr-2 h-4 w-4' />
+                     Print
+                  </DropdownMenuItem>
+               </DropdownMenuContent>
+            </DropdownMenu>
+         </div>
          <div className='font-sans text-base leading-relaxed bg-white p-6 rounded-lg shadow-sm'>
             {formatTripPlan(tripPlan)}
          </div>
@@ -217,8 +283,8 @@ const PlanTripPage = () => {
                            <Slider
                               id='budget'
                               name='budget'
-                              min={500}
-                              max={10000}
+                              min={800}
+                              max={20000}
                               step={100}
                               value={[formData.budget]}
                               onValueChange={(value) => handleSliderChange('budget', value)}
@@ -294,7 +360,7 @@ const PlanTripPage = () => {
                            <p className='text-muted-foreground'>Generating your trip plan...</p>
                         </div>
                      ) : (
-                        <TripPlanDisplay tripPlan={tripPlan} />
+                        <TripPlanDisplay tripPlan={tripPlan} formData={formData} />
                      )}
                   </CardContent>
                </Card>
