@@ -46,7 +46,7 @@ const SignUp = () => {
    });
 
    async function onSubmit(values: z.infer<typeof formSchema>) {
-      const { name, email, password, confirmPassword } = values;
+      const { name, email, password } = values;
       setIsLoading(true);
 
       try {
