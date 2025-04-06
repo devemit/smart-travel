@@ -12,7 +12,7 @@ const destinations = [
    {
       id: 2,
       name: 'Barcelona, Spain',
-      image: 'https://images.unsplash.com/photo-1520232658390-440d6120ca6b?q=80&w=2070&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       description: 'Vibrant city with stunning architecture and Mediterranean charm',
       rating: 4.7,
    },
