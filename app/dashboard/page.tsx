@@ -1,8 +1,11 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
 import { CalendarIcon, GlobeIcon, LuggageIcon, MapIcon, UserIcon } from 'lucide-react';
-import { redirect } from 'next/navigation';
+
 import { capitalizeFirstLetter, getGreeting } from '@/lib/helpers';
 import { getSession } from '@/actions/authActions';
 
@@ -79,7 +82,6 @@ const Dashboard = async () => {
                </Card>
             </div>
 
-            {/* Main section - Plan Trip Card */}
             <div className='mt-8'>
                <Card className='bg-gradient-to-r from-blue-600 to-indigo-700 text-white overflow-hidden'>
                   <CardContent className='p-8 relative'>
@@ -88,7 +90,8 @@ const Dashboard = async () => {
                         <h2 className='text-2xl font-bold mb-4'>Plan Your Next Adventure</h2>
                         <p className='mb-6 max-w-md'>
                            Create a personalized travel itinerary with our AI-powered trip planner.
-                           Tell us your preferences and we'll craft the perfect journey for you.
+                           Tell us your preferences and we&apos;ll craft the perfect journey for
+                           you.
                         </p>
                         <Button
                            size='lg'
@@ -104,7 +107,6 @@ const Dashboard = async () => {
                </Card>
             </div>
 
-            {/* Travel Tip */}
             <div className='mt-6'>
                <Card>
                   <CardContent className='p-6'>
