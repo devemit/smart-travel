@@ -1,8 +1,10 @@
 'use server';
 
-import { getSession } from './authActions';
 import { groq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
+
+import { getSession } from './authActions';
+import { formatTripTextPlan, processStreamingChunk } from '@/helpers/formatPropmt';
 
 export type TripFormData = {
    destination: string;
@@ -13,56 +15,13 @@ export type TripFormData = {
    preferences: string;
 };
 
-// Helper function to process streaming chunks
-const processStreamingChunk = (chunk: string): string => {
-   // Filter out metadata chunks
-   if (chunk.startsWith('f:') || chunk.startsWith('e:') || chunk.startsWith('d:')) {
-      return '';
-   }
-
-   // Process content chunks (starting with "0:")
-   if (chunk.startsWith('0:')) {
-      // Extract the actual content
-      const content = chunk.substring(2);
-
-      // Remove escape sequences and trailing quotes
-      let processedContent = content.replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/"$/, '');
-
-      return processedContent;
-   }
-
-   return '';
-};
-
-// Function to format the trip plan with proper markdown formatting
-const formatTripPlan = (text: string): string => {
-   // Ensure proper line breaks
-   let formattedText = text
-      .replace(/\n\s*\n/g, '\n\n') // Normalize multiple newlines
-      .replace(/\s+$/gm, ''); // Remove trailing whitespace on each line
-
-   // Format headings
-   formattedText = formattedText
-      .replace(/\*\*([^*]+)\*\*/g, '**$1**') // Fix bold text
-      .replace(/"([^"]+)"/g, '$1'); // Remove quotes around words
-
-   // Format lists
-   formattedText = formattedText
-      .replace(/^\s*\*\s+/gm, '* ') // Ensure consistent list item formatting
-      .replace(/^\s*###\s+/gm, '### '); // Ensure consistent subheading formatting
-
-   return formattedText;
-};
-
 export const generateTripPlan = async (formData: TripFormData) => {
    try {
-      // Check if user is authenticated
       const session = await getSession();
       if (!session) {
          return { error: 'You must be logged in to generate a trip plan' };
       }
 
-      // Format dates for better readability
       const startDate = new Date(formData.startDate).toLocaleDateString('en-US', {
          weekday: 'long',
          year: 'numeric',
@@ -77,7 +36,6 @@ export const generateTripPlan = async (formData: TripFormData) => {
          day: 'numeric',
       });
 
-      // Create a detailed prompt for the AI
       const prompt = `Create a detailed travel itinerary for a trip to ${
          formData.destination
       } from ${startDate} to ${endDate}. 
@@ -98,21 +56,17 @@ export const generateTripPlan = async (formData: TripFormData) => {
     
     IMPORTANT: Use markdown formatting with ** for headings, ### for subheadings, and * for list items.`;
 
-      // Call the language model directly with the prompt
       const result = streamText({
          model: groq('llama-3.1-8b-instant'),
          prompt,
          system: 'You are a helpful travel assistant that creates detailed travel itineraries.',
       });
 
-      // Process the streaming response
       let tripPlan = '';
       const response = result.toDataStreamResponse();
 
-      // Read the response as text
       const text = await response.text();
 
-      // Process the text in chunks
       const chunks = text.split('\n');
       for (const chunk of chunks) {
          const processedChunk = processStreamingChunk(chunk);
@@ -121,14 +75,12 @@ export const generateTripPlan = async (formData: TripFormData) => {
          }
       }
 
-      // Clean up any remaining formatting issues
       tripPlan = tripPlan
          .replace(/\*\*"([^"]+)"\*\*/g, '**$1**') // Fix bold text with quotes
          .replace(/"([^"]+)"/g, '$1') // Remove remaining quotes around words
          .replace(/(\w+)"(\w+)/g, '$1$2'); // Remove quotes between words
 
-      // Format the trip plan with proper markdown formatting
-      const formattedTripPlan = formatTripPlan(tripPlan);
+      const formattedTripPlan = formatTripTextPlan(tripPlan);
 
       return { tripPlan: formattedTripPlan };
    } catch (error) {
