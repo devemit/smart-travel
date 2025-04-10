@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+
 import Navbar from '@/components/navbar';
 import { Toaster } from 'sonner';
+
+import './globals.css';
 
 const geistSans = Geist({
    variable: '--font-geist-sans',
@@ -15,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-   title: 'Smart Travel - Your Intelligent Travel Companion',
+   title: 'Easy Travel - Your Intelligent Travel Companion',
    description: 'Plan your trips, discover new places, and travel smarter',
 };
 
