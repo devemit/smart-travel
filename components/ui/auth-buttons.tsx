@@ -8,7 +8,7 @@ interface AuthButtonsProps {
 
 export const AuthButtons = ({ routes }: AuthButtonsProps) => {
    return (
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1.5'>
          {routes.map((item) => {
             const isSignIn = item.title === 'Sign In';
             const Icon = isSignIn ? LogIn : UserPlus;
@@ -23,10 +23,10 @@ export const AuthButtons = ({ routes }: AuthButtonsProps) => {
                      isSignIn
                         ? 'border-blue-500 text-blue-500 hover:bg-blue-50'
                         : 'bg-blue-600 hover:bg-blue-700'
-                  }`}
+                  } px-2 py-1 h-7 text-xs`}
                >
-                  <Link href={item.path} className='flex items-center gap-1.5'>
-                     <Icon className='h-3.5 w-3.5' />
+                  <Link href={item.path} className='flex items-center gap-1'>
+                     <Icon className='h-3 w-3' />
                      <span>{item.title}</span>
                   </Link>
                </Button>
