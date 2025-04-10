@@ -26,13 +26,13 @@ const getIconForNavItem = (title: string) => {
    }
 };
 
-export default function MobileNav() {
+export default async function MobileNav() {
    const mobileNavItems = navConfig.slice(0, 6);
 
-   const session = getSession();
+   const session = await getSession();
 
    return (
-      <div className='md:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50'>
+      <div className='lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50'>
          <div className='flex justify-around py-3'>
             {mobileNavItems.map((item) => {
                if (item.path === '/dashboard' && !session) return;

@@ -52,7 +52,7 @@ export default function WeatherSearch({
       if (reccomendation && !searchTerm) {
          handleSearch(reccomendation);
       }
-   }, [reccomendation, searchTerm]);
+   }, [reccomendation]);
 
    return (
       <div className='bg-white rounded-xl shadow-lg p-4 sm:p-6 mt-6 sm:mt-8'>

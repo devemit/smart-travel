@@ -8,6 +8,8 @@ import { MapPin } from 'lucide-react';
 import { firstLetter } from '@/lib/helpers';
 import { authRoutes, navConfig } from '@/utils/navigation-config';
 import { getSession, signOutAction } from '@/actions/authActions';
+import { SignOut } from './ui/sign-out';
+import { AuthButtons } from './ui/auth-buttons';
 
 export default async function Navbar() {
    const session = await getSession();
@@ -27,7 +29,7 @@ export default async function Navbar() {
                   </div>
                </Link>
 
-               <div className='space-x-8 hidden md:flex items-center'>
+               <div className='space-x-8 hidden lg:flex items-center'>
                   {navConfig.map((item) => {
                      if (item.path === '/dashboard' && !session) return;
 
@@ -51,40 +53,26 @@ export default async function Navbar() {
                            {firstLetter(userName as string).toUpperCase()}
                         </div>
                         <form action={signOutAction}>
-                           <Button
-                              className='cursor-pointer'
-                              variant='ghost'
-                              size='sm'
-                              type='submit'
-                           >
-                              Sign Out
-                           </Button>
+                           <SignOut />
                         </form>
                      </div>
                   ) : (
-                     <div className='space-x-2'>
-                        {authRoutes.map((item) => (
-                           <Button key={item.path} asChild>
-                              <Link href={item.path}>{item.title}</Link>
-                           </Button>
-                        ))}
-                     </div>
+                     <AuthButtons routes={authRoutes} />
                   )}
                </div>
 
                <div className='md:hidden'>
                   {session ? (
-                     <div className='bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-medium'>
-                        {firstLetter(userName as string).toUpperCase()}
+                     <div className='flex items-center gap-2'>
+                        <div className='bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-md font-medium'>
+                           {firstLetter(userName as string).toUpperCase()}
+                        </div>
+                        <form action={signOutAction}>
+                           <SignOut />
+                        </form>
                      </div>
                   ) : (
-                     <div className='space-x-2'>
-                        {authRoutes.map((item) => (
-                           <Button key={item.path} asChild className='cursor-pointer'>
-                              <Link href={item.path}>{item.title}</Link>
-                           </Button>
-                        ))}
-                     </div>
+                     <AuthButtons routes={authRoutes} />
                   )}
                </div>
             </div>

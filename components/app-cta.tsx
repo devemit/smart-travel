@@ -39,7 +39,7 @@ export default function AppCTA() {
                         className='bg-white text-blue-800 hover:bg-blue-100 w-full sm:w-auto'
                         asChild
                      >
-                        <Link href='/auth/signup'>Sign Up Free</Link>
+                        <Link href='/signup'>Sign Up Free</Link>
                      </Button>
                      <Button
                         size='lg'
