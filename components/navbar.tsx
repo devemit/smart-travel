@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import MobileNav from './mobile-nav';
 
-import { Button } from './ui/button';
 import { MapPin } from 'lucide-react';
 
 import { firstLetter } from '@/lib/helpers';
