@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 const destinations = [
    {
@@ -40,8 +39,7 @@ export default function FeaturedDestinations() {
 
          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {destinations.map((destination) => (
-               <Link
-                  href='/'
+               <div
                   key={destination.id}
                   className='group rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow'
                >
@@ -63,7 +61,7 @@ export default function FeaturedDestinations() {
                      </div>
                      <p className='text-gray-600 text-sm'>{destination.description}</p>
                   </div>
-               </Link>
+               </div>
             ))}
          </div>
       </section>
