@@ -1,15 +1,13 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { ArrowRight } from 'lucide-react';
 
+import { getSession } from '@/actions/authActions';
 import { Button } from './ui/button';
+import { Tabs } from './tabs';
 
-export default function HeroSection() {
-   const [activeTab, setActiveTab] = useState(0);
+export default async function HeroSection() {
+   const session = await getSession();
 
    const tabs = [
       {
@@ -54,8 +52,9 @@ export default function HeroSection() {
 
                   <div className='flex flex-wrap gap-4'>
                      <Button size='lg' className='bg-white text-blue-600 hover:bg-blue-50' asChild>
-                        <Link href='/signup'>
-                           Start Free <ArrowRight className='ml-2 h-5 w-5' />
+                        <Link href={session ? '/dashboard' : '/signup'}>
+                           {session ? 'Dashboard' : 'Start Free'}{' '}
+                           <ArrowRight className='ml-2 h-5 w-5' />
                         </Link>
                      </Button>
 
@@ -85,45 +84,7 @@ export default function HeroSection() {
 
                <div>
                   <div className='bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 shadow-xl'>
-                     <div className='flex mb-4 gap-2'>
-                        {tabs.map((tab, index) => (
-                           <button
-                              key={index}
-                              onClick={() => setActiveTab(index)}
-                              className={`px-4 py-2 text-sm rounded-lg transition-colors ${
-                                 activeTab === index
-                                    ? 'bg-white text-blue-800 font-medium'
-                                    : 'text-white hover:bg-white/10'
-                              }`}
-                           >
-                              {tab.title}
-                           </button>
-                        ))}
-                     </div>
-
-                     <div className='relative rounded-lg overflow-hidden aspect-[4/3] bg-gray-900'>
-                        {tabs.map((tab, index) => (
-                           <div
-                              key={index}
-                              className={`absolute inset-0 transition-opacity duration-300 ${
-                                 activeTab === index ? 'opacity-100' : 'opacity-0'
-                              }`}
-                           >
-                              <Image
-                                 src={tab.image}
-                                 alt={tab.title}
-                                 fill
-                                 className='object-cover'
-                                 sizes='(max-width: 768px) 100vw, 50vw'
-                                 priority={index === 0}
-                              />
-                              <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent'></div>
-                              <div className='absolute bottom-0 left-0 right-0 p-6'>
-                                 <p className='text-white font-medium text-lg'>{tab.description}</p>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
+                     <Tabs tabs={tabs} />
                   </div>
                </div>
             </div>
