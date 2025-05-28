@@ -76,11 +76,11 @@ export default function ContactSection() {
                            <div>
                               <h4 className='font-bold text-gray-800'>Our Location</h4>
                               <p className='text-gray-600'>
-                                 123 Travel Street
+                                 Franjo Kluz
                                  <br />
-                                 San Francisco, CA 94103
+                                 Skopje
                                  <br />
-                                 United States
+                                 Macedonia
                               </p>
                            </div>
                         </div>
@@ -90,9 +90,9 @@ export default function ContactSection() {
                            <div>
                               <h4 className='font-bold text-gray-800'>Call Us</h4>
                               <p className='text-gray-600'>
-                                 +1 (555) 123-4567
+                                 +389 70 222 333
                                  <br />
-                                 Mon-Fri, 9am-6pm PST
+                                 Mon-Fri, 9am-6pm
                               </p>
                            </div>
                         </div>
@@ -101,11 +101,7 @@ export default function ContactSection() {
                            <MailIcon className='h-6 w-6 text-primary mt-1 mr-3' />
                            <div>
                               <h4 className='font-bold text-gray-800'>Email Us</h4>
-                              <p className='text-gray-600'>
-                                 info@smarttravel.com
-                                 <br />
-                                 support@smarttravel.com
-                              </p>
+                              <p className='text-gray-600'>ilievm.10@gmail.com</p>
                            </div>
                         </div>
 

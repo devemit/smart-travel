@@ -9,7 +9,7 @@ export default function OurStory() {
                <h2 className='text-3xl md:text-4xl font-bold mb-6 text-gray-900'>Our Story</h2>
                <div className='space-y-4 text-gray-700'>
                   <p>
-                     Smart Travel was founded in 2020 with a simple yet ambitious mission: to make
+                     Easy Travel was founded in 2020 with a simple yet ambitious mission: to make
                      travel planning smarter, more personalized, and accessible to everyone. What
                      started as a small team of travel enthusiasts and tech innovators has grown
                      into a global platform serving travelers worldwide.
@@ -22,18 +22,17 @@ export default function OurStory() {
                      recommendations tailored to each traveler&apos;s preferences.
                   </p>
                   <p>
-                     Today, Smart Travel combines artificial intelligence, real-time data, and human
+                     Today, Easy Travel combines artificial intelligence, real-time data, and human
                      expertise to create seamless travel experiences. We&apos;re proud to help
                      millions of users discover new destinations, create unforgettable memories, and
                      travel with confidence.
                   </p>
                </div>
-               <Button className='mt-6'>Learn More About Our Vision</Button>
             </div>
             <div className='relative h-[400px] rounded-xl overflow-hidden shadow-xl'>
                <Image
                   src='https://plus.unsplash.com/premium_photo-1661933707147-3b1840e63102?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-                  alt='Smart Travel team'
+                  alt='Easy Travel team'
                   fill
                   className='object-cover'
                />

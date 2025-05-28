@@ -34,7 +34,7 @@ export default function CompanyValues() {
             <div className='text-center mb-12'>
                <h2 className='text-3xl md:text-4xl font-bold mb-4 text-gray-900'>Our Values</h2>
                <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-                  The principles that guide everything we do at Smart Travel
+                  The principles that guide everything we do at Easy Travel
                </p>
             </div>
 

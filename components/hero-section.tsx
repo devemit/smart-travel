@@ -77,7 +77,7 @@ export default async function HeroSection() {
                         ))}
                      </div>
                      <p className='ml-4 text-sm'>
-                        <span className='font-semibold'>10,000+</span> travelers trust EasyTravel
+                        <span className='font-semibold'>1000+</span> travelers trust EasyTravel
                      </p>
                   </div>
                </div>
