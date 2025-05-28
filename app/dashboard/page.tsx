@@ -121,7 +121,7 @@ const Dashboard = async () => {
 
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8'>
                <div className='lg:col-span-2'>
-                  <Card className='bg-gradient-to-r from-blue-600 to-indigo-700 text-white overflow-hidden shadow-xl transform hover:scale-[1.01] transition-transform duration-300'>
+                  <Card className='bg-white text-gray-800  transform hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-lg border-l-4'>
                      <CardContent className='p-8 relative'>
                         <div className='absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2'></div>
                         <div className='absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2'></div>
@@ -134,11 +134,12 @@ const Dashboard = async () => {
                            </p>
                            <Button
                               size='lg'
-                              className='bg-white text-blue-700 hover:bg-blue-50 font-medium shadow-lg'
+                              className='bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800 font-medium shadow-lg transition-transform transform hover:scale-105'
                               asChild
                            >
-                              <a href='/plan-trip'>
-                                 <MapIcon className='mr-2 h-5 w-5' /> Start Planning Your Trip
+                              <a href='/plan-trip' className='flex items-center'>
+                                 <MapIcon className='mr-2 h-5 w-5 animate-bounce' /> Start Planning
+                                 Your Trip
                               </a>
                            </Button>
                         </div>

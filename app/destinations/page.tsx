@@ -7,7 +7,7 @@ import DestinationsGrid from './components/destinations-grid';
 import PopularRegions from './components/popular-regions';
 
 export const metadata: Metadata = {
-   title: 'Destinations - Smart Travel',
+   title: 'Destinations - Easy Travel',
    description: 'Explore amazing destinations around the world for your next adventure',
 };
 

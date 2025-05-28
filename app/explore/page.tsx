@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import ExploreContent from './components/explore-content';
 
 export const metadata: Metadata = {
-   title: 'Explore - Smart Travel',
+   title: 'Explore - Easy Travel',
    description: 'Discover amazing destinations and experiences for your next adventure',
 };
 
